@@ -113,7 +113,7 @@ namespace Project.Model {
                     return u;
                 }
             } catch (SqlException exception) {
-                
+                throw exception;
             }
             return null;
         }

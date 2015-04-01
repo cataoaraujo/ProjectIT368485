@@ -9,6 +9,7 @@ password varchar(45) NOT NULL,
 email varchar(45) NOT NULL,
 securityQuestion varchar(45) NOT NULL,
 securityAnswer varchar(45) NOT NULL,
+accountReason varchar(128) NOT NULL,
 type varchar(20) NOT NULL,
 accountApproval bit
 );

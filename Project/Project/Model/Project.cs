@@ -17,8 +17,8 @@ namespace Project.Model {
         public bool highlighted { set; get; }
 
 
-        public List<Submissions> submission { set; get; }
-        public List<Committee> committeMembers { set; get; }
+       // public List<Submissions> subms { set; get; }
+        //public List<Committee> committes { set; get; }
 
         public List<String> keywords { set; get; }
 

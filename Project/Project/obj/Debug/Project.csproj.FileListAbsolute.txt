@@ -3,3 +3,8 @@ E:\ProjectIT368485\Project\Project\bin\Project.pdb
 E:\ProjectIT368485\Project\Project\obj\Debug\Project.csprojResolveAssemblyReference.cache
 E:\ProjectIT368485\Project\Project\obj\Debug\Project.dll
 E:\ProjectIT368485\Project\Project\obj\Debug\Project.pdb
+H:\ProjectIT368485\Project\Project\obj\Debug\Project.csprojResolveAssemblyReference.cache
+H:\ProjectIT368485\Project\Project\obj\Debug\Project.dll
+H:\ProjectIT368485\Project\Project\obj\Debug\Project.pdb
+H:\ProjectIT368485\Project\Project\bin\Project.dll
+H:\ProjectIT368485\Project\Project\bin\Project.pdb
