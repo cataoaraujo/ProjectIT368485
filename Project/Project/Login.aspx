@@ -20,6 +20,7 @@
                 <asp:TextBox ID="password" CssClass="form-control" runat="server" TextMode="Password"></asp:TextBox>
             </div>
             <asp:Button ID="submit" CssClass="btn btn-default" runat="server" Text="Sign in" OnClick="submit_Click" />
+            <a href="signup.aspx" class="btn btn-primary">Sign Up</a>
         </div>
     </form>
 </asp:Content>
