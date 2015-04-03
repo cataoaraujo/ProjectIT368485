@@ -19,9 +19,11 @@ namespace Project
         {
             User u = new User();
             u = u.login(userID.Text, password.Text);
-            if(u != null){
+            if (u != null) {
                 Session["user"] = u;
                 Response.Redirect("Default.aspx");
+            } else {
+                errorMsg.Text = "User or Password is wrong, or maybe you were not approved to use the system yet.";
             }
         }
     }

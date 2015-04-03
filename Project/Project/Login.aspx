@@ -8,6 +8,9 @@
     <br />
     <form runat="server">
         <div class="container well">
+             <div>
+                <asp:Label ID="errorMsg" runat="server" Text=""></asp:Label>
+            </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">User ID</label>
                 <asp:TextBox ID="userID" CssClass="form-control" runat="server"></asp:TextBox>

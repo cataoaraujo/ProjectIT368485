@@ -50,8 +50,8 @@ namespace Project.Model {
                 command.Parameters.AddWithValue("securityQuestion",securityQuestion);
                 command.Parameters.AddWithValue("securityAnswer",securityAnswer);
                 command.Parameters.AddWithValue("accountReason",accountReason);
-                command.Parameters.AddWithValue("type",type);
-                command.Parameters.AddWithValue("approval",accountApproval);
+                command.Parameters.AddWithValue("type","user");
+                command.Parameters.AddWithValue("approval","False");
                 if (command.ExecuteNonQuery() == 1) {
                     return true;
                 }
@@ -66,7 +66,7 @@ namespace Project.Model {
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
                 dbConnection.Open();
-                string SQLString = "UPDATE UserAccount SET firstName = @firstName, lastName = @lastName, password = @password, email = @email, securityQuestion = @securityQuestion, securityAnswer = @securityAnswer, accountReason = @accountReason, type = @type, accountApproval = @approval WHERE userID = @userID";
+                string SQLString = "UPDATE UserAccount SET firstName = @firstName, lastName = @lastName, password = @password, email = @email, securityQuestion = @securityQuestion, securityAnswer = @securityAnswer, accountReason = @accountReason, accountApproval = @approval WHERE userID = @userID";
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 command.Parameters.AddWithValue("firstName", firstName);
                 command.Parameters.AddWithValue("lastName", lastName);
@@ -75,7 +75,6 @@ namespace Project.Model {
                 command.Parameters.AddWithValue("securityQuestion", securityQuestion);
                 command.Parameters.AddWithValue("securityAnswer", securityAnswer);
                 command.Parameters.AddWithValue("accountReason", accountReason);
-                command.Parameters.AddWithValue("type", type);
                 command.Parameters.AddWithValue("approval", accountApproval);
                 command.Parameters.AddWithValue("userID", userID);
                 if (command.ExecuteNonQuery() == 1) {
@@ -92,10 +91,11 @@ namespace Project.Model {
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
                 dbConnection.Open();
-                string SQLString = "SELECT * FROM UserAccount WHERE userID = @userID AND password = @password";
+                string SQLString = "SELECT * FROM UserAccount WHERE userID = @userID AND password = @password AND accountApproval = @accountApproval";
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 command.Parameters.AddWithValue("userID", userID);
                 command.Parameters.AddWithValue("password", password);
+                command.Parameters.AddWithValue("accountApproval", "True");
                 SqlDataReader result = command.ExecuteReader();
                 while (result.Read()) {
                     User u = new User();
@@ -109,7 +109,7 @@ namespace Project.Model {
                     u.securityAnswer = result["securityAnswer"].ToString();
                     u.accountReason = result["accountReason"].ToString();
                     u.type = result["type"].ToString();
-                    u.accountApproval = Convert.ToBoolean(result["accountApproval"].ToString());
+                    u.accountApproval = true;
                     return u;
                 }
             } catch (SqlException exception) {

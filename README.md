@@ -4,9 +4,9 @@ IT368485 Project
 
 ## Rodrigo
 
-* [ ] Sign-in User
+* [x] Sign-in User
 
-* [ ] Sign up Account (must wait for approval before signing in)
+* [x] Sign up Account (must wait for approval before signing in)
 Details: First Name, Last Name, UserID (check for existence), Password, Confirm Password, Email (must be ISU's), Security Question, Security Answer, Reason for an Account
 
 * [ ] add Thesis/Project (including live link to run a project) (details to include forthcoming)
