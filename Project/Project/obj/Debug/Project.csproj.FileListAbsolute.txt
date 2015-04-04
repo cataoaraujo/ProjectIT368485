@@ -8,3 +8,8 @@ H:\ProjectIT368485\Project\Project\obj\Debug\Project.dll
 H:\ProjectIT368485\Project\Project\obj\Debug\Project.pdb
 H:\ProjectIT368485\Project\Project\bin\Project.dll
 H:\ProjectIT368485\Project\Project\bin\Project.pdb
+H:\Project\ProjectIT368485\Project\Project\bin\Project.dll
+H:\Project\ProjectIT368485\Project\Project\bin\Project.pdb
+H:\Project\ProjectIT368485\Project\Project\obj\Debug\Project.csprojResolveAssemblyReference.cache
+H:\Project\ProjectIT368485\Project\Project\obj\Debug\Project.dll
+H:\Project\ProjectIT368485\Project\Project\obj\Debug\Project.pdb
