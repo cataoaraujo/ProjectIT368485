@@ -118,9 +118,27 @@ namespace Project.Model {
             return null;
         }
 
-        public bool approveAccount() {
-            accountApproval = true;
-            return update();
+        public bool approveAccount(string userID) {
+            string sqlString = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(sqlString);
+
+            string SQLString = "UPDATE UserAccount SET accountApproval ='True' WHERE userID = @userID";
+            SqlCommand command = new SqlCommand(SQLString, dbConnection);
+            command.Parameters.AddWithValue("@userID", userID);
+            try
+            {
+                dbConnection.Open();
+                
+                if (command.ExecuteNonQuery() == 1)
+                {
+                    return true;
+                }
+            }
+            catch (SqlException exception)
+            {
+                
+            }
+            return false;
         }
     }
 }

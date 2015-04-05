@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project.Model {
+namespace Project {
     
     
     public partial class AccountApproval {
