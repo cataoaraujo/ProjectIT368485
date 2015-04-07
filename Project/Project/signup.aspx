@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="signup.aspx.cs" Inherits="Project.signup" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="signup.aspx.cs" Inherits="FinalProject.signup" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -6,7 +6,7 @@
     <br />
     <br />
     <br />
-    <form id="Form1" runat="server">
+
         <div class="container well">
             <div>
                 <asp:Label ID="errorMsg" runat="server" Text=""></asp:Label>
@@ -57,5 +57,5 @@
             </div>
             <asp:Button ID="submit" CssClass="btn btn-default" runat="server" Text="Sign up" OnClick="submit_Click" />
         </div>
-    </form>
+
 </asp:Content>

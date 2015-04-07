@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="Project.js.Default" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="FinalProject.js.Default" %>
 
 <!DOCTYPE html>
 
@@ -10,26 +10,37 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <button type="button" class="navbar-toggle" data-toggle=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="Default.aspx">Thesis Submission</a>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="login.aspx">Login</a></li>
-                </ul>
+    <form id="Form1" runat="server">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="Default.aspx">Thesis Submission</a>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav pull-right">
+                        <%if (Session["user"] == null) { %>
+                        <li><a href="login.aspx">Login</a></li>
+                        <%} else {
+                              FinalProject.Model.User u = (FinalProject.Model.User)Session["user"];
+                              if (u.type.ToLower().Equals("admin")) {
+                        %>
+                            <li><a href="Dashboard.aspx">Dashboard</a></li>
+                        <%    } %>
+                        <li><a href="Options.aspx">Options</a></li>
+                        <li><a href="Logout.aspx">Logout</a></li>
+                        <%} %>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <asp:ContentPlaceHolder ID="Content" runat="server">
-
-        </asp:ContentPlaceHolder>
-    </div>
+        <div class="container">
+            <asp:ContentPlaceHolder ID="Content" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
     <script src="js/jquery-2.1.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>

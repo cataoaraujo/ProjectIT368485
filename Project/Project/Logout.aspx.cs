@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace FinalProject {
-    public partial class Default : System.Web.UI.Page {
+    public partial class Logout : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-            
+            if (Session["user"] != null) {
+                Session.Remove("user");
+            }
+            Response.Redirect("Default.aspx");
         }
     }
 }

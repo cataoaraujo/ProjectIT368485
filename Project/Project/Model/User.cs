@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
-namespace Project.Model {
+namespace FinalProject.Model {
     public class User {
         public int id { set; get; }
         public string firstName { set; get; }
@@ -36,11 +36,12 @@ namespace Project.Model {
             return true;
         }
         public bool add() {
+            bool flag = false;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
                 dbConnection.Open();
-                string SQLString = "INSERT INTO UserAccount VALUES(@firstName, @lastName, @userID, @password, @email, @securityQuestion, @securityAnswer, @accountReason, @type, @approval)";
+                string SQLString = "INSERT INTO UserAccount VALUES(@firstName, @lastName, @userID, @password, @email, @securityQuestion, @securityAnswer, @accountReason, @type, @approval); SELECT SCOPE_IDENTITY () As NewID;";
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 command.Parameters.AddWithValue("firstName",firstName);
                 command.Parameters.AddWithValue("lastName",lastName);
@@ -52,13 +53,19 @@ namespace Project.Model {
                 command.Parameters.AddWithValue("accountReason",accountReason);
                 command.Parameters.AddWithValue("type","user");
                 command.Parameters.AddWithValue("approval","False");
-                if (command.ExecuteNonQuery() == 1) {
-                    return true;
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows) {
+                    reader.Read();
+                    id = Convert.ToInt32(reader["NewID"]);
+                    flag = true;
                 }
+
+                reader.Close();
             } catch (SqlException exception) {
                 
             }
-            return false;
+            return flag;
         }
 
         public bool update() {

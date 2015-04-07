@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Project {
+namespace FinalProject {
     
     
     public partial class Login {

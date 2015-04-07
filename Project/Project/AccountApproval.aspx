@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="AccountApproval.aspx.cs" Inherits="Project.AccountApproval" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="AccountApproval.aspx.cs" Inherits="FinalProject.AccountApproval" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -6,7 +6,7 @@
     <br />
     <br />
     <br />
-    <form id="form1" runat="server">
+
     <div>
         <h3>Approve an Account</h3>
         <br />
@@ -30,12 +30,12 @@
             <SortedDescendingCellStyle BackColor="#E5E5E5" />
             <SortedDescendingHeaderStyle BackColor="#242121" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:it368485_FinalProjectConnectionString %>" SelectCommand="SELECT DISTINCT [userID], [firstName], [lastName], [accountReason] FROM [UserAccount] WHERE ([accountApproval] = @accountApproval)">
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Database %>" SelectCommand="SELECT DISTINCT [userID], [firstName], [lastName], [accountReason] FROM [UserAccount] WHERE ([accountApproval] = @accountApproval)">
             <SelectParameters>
                 <asp:Parameter DefaultValue="False" Name="accountApproval" Type="Boolean" />
             </SelectParameters>
         </asp:SqlDataSource>
         <asp:Label ID="Label1" runat="server"></asp:Label>
     </div>
-    </form>
+
 </asp:Content>

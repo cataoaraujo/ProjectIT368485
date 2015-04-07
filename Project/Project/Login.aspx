@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Project.Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="FinalProject.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -6,7 +6,6 @@
     <br />
     <br />
     <br />
-    <form runat="server">
         <div class="container well">
              <div>
                 <asp:Label ID="errorMsg" runat="server" Text=""></asp:Label>
@@ -22,5 +21,4 @@
             <asp:Button ID="submit" CssClass="btn btn-default" runat="server" Text="Sign in" OnClick="submit_Click" />
             <a href="signup.aspx" class="btn btn-primary">Sign Up</a>
         </div>
-    </form>
 </asp:Content>

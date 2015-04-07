@@ -4,15 +4,22 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Project.Model;
+using FinalProject.Model;
 
-namespace Project
+namespace FinalProject
 {
     public partial class AccountApproval : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["user"] != null) {
+                User u = (User)Session["user"];
+                if (!u.type.ToLower().Equals("admin")) {
+                    Response.Redirect("permissionDenied.aspx");
+                }
+            } else {
+                Response.Redirect("Login.aspx");
+            }
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, GridViewCommandEventArgs e)
