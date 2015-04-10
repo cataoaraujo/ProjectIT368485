@@ -17,7 +17,7 @@
                         <td>
                             <asp:TextBox ID="keyword" runat="server"></asp:TextBox></td>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ForeColor="Red"
-                            ControlToValidate="keyword" runat="server" ErrorMessage="pleaase enter keywords"></asp:RequiredFieldValidator>
+                            ControlToValidate="keyword" runat="server" ErrorMessage="please enter keywords"></asp:RequiredFieldValidator>
                     </tr>
                     <tr>
                         <td></td>

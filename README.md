@@ -34,13 +34,13 @@ Details: Course #, live link, keywords, abstract, documentation in Word/PDF, scr
 
 ## Bin
 
-* [ ] Approve Account <== Admin only
+* [x] Approve Account <== Admin only
 
 * [ ] Export Thesis/Project (to XML/JSON format)
 
-* [ ] Subscribe to Thesis/Project mailing (based on keywords, etc.)
+* [x] Subscribe to Thesis/Project mailing (based on keywords, etc.)
 
-* [ ] Unsubscribe from Mailing
+* [x] Unsubscribe from Mailing
 
 * [ ] Print Flyer (for postings at committee members' offices) <== Admin only
 
