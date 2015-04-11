@@ -201,5 +201,101 @@ namespace FinalProject.Model {
             }
             return false;
         }
+        
+        public bool verifyUserID(String userID)
+        {
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try
+            {
+                dbConnection.Open();
+                string SQLString = "SELECT * FROM UserAccount WHERE userID = @userID";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                command.Parameters.AddWithValue("userID", userID);
+                SqlDataReader result = command.ExecuteReader();
+                if (result.Read())
+                {
+                    return true;
+                }
+            }
+            catch (SqlException exception)
+            {
+
+            }
+            return false;
+        }
+
+        public string getQuestion(String userID)
+        {
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try
+            {
+                dbConnection.Open();
+                string SQLString = "SELECT securityQuestion FROM UserAccount WHERE userID = @userID";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                command.Parameters.AddWithValue("userID", userID);
+                SqlDataReader result = command.ExecuteReader();
+                if (result.Read())
+                {
+                    return result[0].ToString();
+                }
+            }
+            catch (SqlException exception)
+            {
+
+            }
+            return null;
+        }
+
+        public bool checkAnswer(String userID, String securityAnswer)
+        {
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try
+            {
+                dbConnection.Open();
+                string SQLString = "SELECT * FROM UserAccount WHERE userID = @userID and securityAnswer = @securityAnswer ";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                command.Parameters.AddWithValue("userID", userID);
+                command.Parameters.AddWithValue("securityAnswer", securityAnswer);
+                SqlDataReader result = command.ExecuteReader();
+                if (result.Read())
+                {
+                    return true;
+                }
+            }
+            catch (SqlException exception)
+            {
+
+            }
+            return false;
+        }
+
+        public bool updatePwd(String userID,String password)
+        {
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            bool updated = false;
+            try
+            {
+                dbConnection.Open();
+                string SQLString = "Update UserAccount set password = @password where userID=@userID ";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                command.Parameters.AddWithValue("userID", userID);
+                command.Parameters.AddWithValue("password", password);
+                SqlDataReader result = command.ExecuteReader();
+                if (result.Read())
+                {
+                    updated = true;
+                }
+                
+            }
+            catch (SqlException exception)
+            {
+
+            }
+            return true;
+        }
     }
 }
