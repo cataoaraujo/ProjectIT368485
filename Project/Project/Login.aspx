@@ -20,5 +20,7 @@
             </div>
             <asp:Button ID="submit" CssClass="btn btn-default" runat="server" Text="Sign in" OnClick="submit_Click" />
             <a href="signup.aspx" class="btn btn-primary">Sign Up</a>
+            <br /><br />
+            <a href="RetrievePassword.aspx">Forgot Password</a>
         </div>
 </asp:Content>
