@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AccountApproval.aspx" />
+    <Content Include="Approval.aspx" />
+    <Content Include="CheckStatus.aspx" />
     <Content Include="CreateProject.aspx" />
     <Content Include="css\bootstrap-theme.css" />
     <Content Include="css\bootstrap-theme.min.css" />
@@ -70,7 +72,11 @@
     <Content Include="Login.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Options.aspx" />
+    <Content Include="ProjectDetail.aspx" />
     <Content Include="signup.aspx" />
+    <Content Include="SubmissionFinal.aspx" />
+    <Content Include="SubmissionPreliminary.aspx" />
+    <Content Include="SubmissionPresentation.aspx" />
     <Content Include="Subscribe.aspx" />
     <Content Include="Unsubscribe.aspx" />
     <Content Include="Web.config">
@@ -84,6 +90,20 @@
     </Compile>
     <Compile Include="AccountApproval.aspx.designer.cs">
       <DependentUpon>AccountApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Approval.aspx.cs">
+      <DependentUpon>Approval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Approval.aspx.designer.cs">
+      <DependentUpon>Approval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CheckStatus.aspx.cs">
+      <DependentUpon>CheckStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckStatus.aspx.designer.cs">
+      <DependentUpon>CheckStatus.aspx</DependentUpon>
     </Compile>
     <Compile Include="CreateProject.aspx.cs">
       <DependentUpon>CreateProject.aspx</DependentUpon>
@@ -140,6 +160,13 @@
     <Compile Include="Options.aspx.designer.cs">
       <DependentUpon>Options.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ProjectDetail.aspx.cs">
+      <DependentUpon>ProjectDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProjectDetail.aspx.designer.cs">
+      <DependentUpon>ProjectDetail.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="signup.aspx.cs">
       <DependentUpon>signup.aspx</DependentUpon>
@@ -147,6 +174,27 @@
     </Compile>
     <Compile Include="signup.aspx.designer.cs">
       <DependentUpon>signup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SubmissionFinal.aspx.cs">
+      <DependentUpon>SubmissionFinal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubmissionFinal.aspx.designer.cs">
+      <DependentUpon>SubmissionFinal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SubmissionPreliminary.aspx.cs">
+      <DependentUpon>SubmissionPreliminary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubmissionPreliminary.aspx.designer.cs">
+      <DependentUpon>SubmissionPreliminary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SubmissionPresentation.aspx.cs">
+      <DependentUpon>SubmissionPresentation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SubmissionPresentation.aspx.designer.cs">
+      <DependentUpon>SubmissionPresentation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Subscribe.aspx.cs">
       <DependentUpon>Subscribe.aspx</DependentUpon>

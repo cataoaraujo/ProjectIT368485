@@ -18,7 +18,29 @@
             </div>
             <div class="col-md-8 col-sm-offset-1 well">
                 <h1>User Projects</h1>
-                <p>List of projects... And the link to open the details of the project, (this will have the option to submit the files [PreliminaryProjectProposal, FinalProjectProposal, ProjectPresentationScheduling] )</p>
+
+                <table class="table table-striped">
+                    <tr>
+                        <th>Project Name</th>
+                        <th>Preliminary Proposal</th>
+                        <th>Final</th>
+                        <th>Presentation Scheduling</th>
+                    </tr>
+                    <asp:ListView ID="ProjectList" runat="server" RepeatDirection="Horizontal">
+                        <ItemTemplate>
+                            <tr>
+                                <td><a href="ProjectDetail.aspx?id=<%# Eval("id") %>"><b><%# Eval("name") %></b></a></td>
+                                <td>
+                                    <label><%# preliminaryStatus(Convert.ToInt32(Eval("id"))) %></label></td>
+                                <td>
+                                    <label><%# finalStatus(Convert.ToInt32(Eval("id"))) %></label></td>
+                                <td>
+                                    <label><%# presentationStatus(Convert.ToInt32(Eval("id"))) %></td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:ListView>
+                </table>
+
                 <a href="CreateProject.aspx" class="btn btn-primary">Create New Project</a>
             </div>
         </div>

@@ -46,6 +46,13 @@
             </div>
             
             <div class="form-group">
+                <label for="keywords">Project Keywords: </label>
+                <asp:TextBox ID="keywords" CssClass="form-control" runat="server"></asp:TextBox>
+            </div>
+
+            <hr />
+
+            <div class="form-group">
                 <label for="committeChair">Committee Chair:</label>
                 <asp:TextBox ID="committeChair" CssClass="form-control" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ErrorMessage="Committee Chair is missing!" ControlToValidate="committeChair" Display="None"></asp:RequiredFieldValidator>

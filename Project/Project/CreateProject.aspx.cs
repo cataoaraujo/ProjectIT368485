@@ -45,7 +45,7 @@ namespace FinalProject {
                 p.addCommittee(member1);
                 p.addCommittee(member2);
                 p.addCommittee(advisor);
-
+                p.keywords = keywords.Text.Split(' ').ToList();
                 if (p.add()) {
                     Response.Redirect("Default.aspx");
                 }

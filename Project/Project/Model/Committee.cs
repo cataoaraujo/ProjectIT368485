@@ -12,6 +12,10 @@ namespace FinalProject.Model {
         public string email { set; get; }
         public string type { set; get; }
 
+        public string comment { set; get; }
+        public string hasApproved { set; get; }
+
+
         public Committee() {
 
         }

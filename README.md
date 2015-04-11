@@ -16,7 +16,7 @@ Details: Course #, live link, keywords, abstract, documentation in Word/PDF, scr
 
 * [ ] Request for / Route Approval
 
-* [ ] Check Approval Status
+* [x] Check Approval Status
 
 
 ## Akash

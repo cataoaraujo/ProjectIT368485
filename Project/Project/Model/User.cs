@@ -18,6 +18,60 @@ namespace FinalProject.Model {
         public string type { set; get; }
         public bool accountApproval { set; get; }
 
+        public List<Project> projects { set; get; }
+        public User() {
+            projects = new List<Project>();
+        }
+
+        public bool projectIsMine(int projectID) {
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try {
+                dbConnection.Open();
+                string SQLString = "SELECT * FROM Project WHERE id = @projectID AND student_id = @student_id";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                command.Parameters.AddWithValue("projectID", projectID);
+                command.Parameters.AddWithValue("student_id", id);
+                SqlDataReader result = command.ExecuteReader();
+                if (result.Read()) {
+                    return true;
+                }
+            } catch (SqlException exception) {
+
+            }
+            return false;
+        }
+
+        public List<Project> getProjects() {
+            projects = new List<Project>();
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try {
+                dbConnection.Open();
+                string SQLString = "SELECT * FROM Project WHERE student_id = @student_id";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                command.Parameters.AddWithValue("student_id", id);
+                SqlDataReader result = command.ExecuteReader();
+                while(result.Read()) {
+                    Project p = new Project();
+                    p.id = Convert.ToInt32(result["id"].ToString());
+                    p.name = result["name"].ToString();
+                    p.user = this;
+                    p.courseNumber = result["courseNumber"].ToString();
+                    p.liveLink = result["liveLink"].ToString();
+                    p.projectAbstract = result["abstract"].ToString();
+                    p.screencastLink = result["screencastLink"].ToString();
+                    p.semester = result["semester"].ToString();
+                    p.dateCreated = Convert.ToDateTime(result["dateCreated"].ToString());
+                    p.highlighted = Convert.ToBoolean(result["highlighted"]);
+                    projects.Add(p);
+                }
+            } catch (SqlException exception) {
+
+            }
+            return projects;
+        }
+
         public bool verifyUserID() {
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);

@@ -1,10 +1,10 @@
-E:\ProjectIT368485\Project\Project\obj\Debug\FinalProject.csprojResolveAssemblyReference.cache
-E:\ProjectIT368485\Project\Project\obj\Debug\Project.dll
-E:\ProjectIT368485\Project\Project\obj\Debug\Project.pdb
-E:\ProjectIT368485\Project\Project\bin\Project.dll
-E:\ProjectIT368485\Project\Project\bin\Project.pdb
 H:\Project\ProjectIT368485\Project\Project\bin\Project.dll
 H:\Project\ProjectIT368485\Project\Project\bin\Project.pdb
 H:\Project\ProjectIT368485\Project\Project\obj\Debug\FinalProject.csprojResolveAssemblyReference.cache
 H:\Project\ProjectIT368485\Project\Project\obj\Debug\Project.dll
 H:\Project\ProjectIT368485\Project\Project\obj\Debug\Project.pdb
+E:\ProjectIT368485\Project\Project\bin\Project.dll
+E:\ProjectIT368485\Project\Project\bin\Project.pdb
+E:\ProjectIT368485\Project\Project\obj\Debug\Project.dll
+E:\ProjectIT368485\Project\Project\obj\Debug\Project.pdb
+E:\ProjectIT368485\Project\Project\obj\Debug\FinalProject.csprojResolveAssemblyReference.cache
