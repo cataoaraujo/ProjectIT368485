@@ -73,6 +73,7 @@
     <Content Include="Logout.aspx" />
     <Content Include="Options.aspx" />
     <Content Include="ProjectDetail.aspx" />
+    <Content Include="RetrievePassword.aspx" />
     <Content Include="signup.aspx" />
     <Content Include="SubmissionFinal.aspx" />
     <Content Include="SubmissionPreliminary.aspx" />
@@ -168,6 +169,13 @@
       <DependentUpon>ProjectDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RetrievePassword.aspx.cs">
+      <DependentUpon>RetrievePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RetrievePassword.aspx.designer.cs">
+      <DependentUpon>RetrievePassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="signup.aspx.cs">
       <DependentUpon>signup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

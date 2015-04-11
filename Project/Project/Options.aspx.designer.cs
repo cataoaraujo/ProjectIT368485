@@ -10,7 +10,7 @@
 namespace FinalProject {
     
     
-    public partial class Projects {
+    public partial class Options {
         
         /// <summary>
         /// ProjectList control.
