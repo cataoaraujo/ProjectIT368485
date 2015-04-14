@@ -280,6 +280,64 @@ namespace FinalProject.Model {
 
             }
         }
+        
+        public string highlightProject()
+        {
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try
+            {
+                dbConnection.Open();
+                string SQLString = "Update Project Set highlighted = 'True' where id in (Select project_id from ProjectStatistics where views=(Select Max(views) from ProjectStatistics) )";
+                string SQLStr = "Update Project Set highlighted = 'False' where id in (Select project_id from ProjectStatistics where ((views<(Select Max(views) from ProjectStatistics))and (downloads<(Select Max(downloads) from ProjectStatistics))))";
+                //string SQLStr = "Update Project Set highlighted = 'False' where id in (Select project_id from ProjectStatistics where views<(Select Max(views) from ProjectStatistics))";
+                string SQLString2 = "Update Project Set highlighted = 'True' where id in (Select project_id from ProjectStatistics where downloads=(Select Max(downloads) from ProjectStatistics) )";
+                
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                SqlCommand cmd = new SqlCommand(SQLStr, dbConnection);
+                SqlCommand command2 = new SqlCommand(SQLString2, dbConnection);
+                
+                command.ExecuteNonQuery();
+                command2.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
+                return "true";
+            }
+            catch (Exception exception)
+            {
+                Console.Write("<br/><br/><br/><br/><br/><br/><br/><br/>" + exception.Message);
+                return exception.Message;
+                
+            }
+        }
+
+        public string showHighlights()
+        {
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try
+            {
+                dbConnection.Open();
+                string result = null;
+
+                string SQLString = "SELECT * FROM Project where highlighted ='True'";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    result = result + "<h2>" + Convert.ToString(reader["name"]) + "</h2>" + "<br/>" + "Abstract: " + Convert.ToString(reader["abstract"]) + "<br/>" +
+                           "<a href='" + Convert.ToString(reader["livelink"]) + "'>" + Convert.ToString(reader["livelink"]) + "</a>"+
+                         "<br/><a href='ViewDetails.aspx?id=" + Convert.ToString(reader["id"]) + "'>View Details</a>" + "<br/><br/><hr>";
+                }
+                
+                return result;
+            }
+            catch (Exception exception)
+            {
+                Console.Write("<br/><br/><br/><br/><br/><br/><br/><br/>" + exception.Message);
+                return exception.Message;
+
+            }
+        }
 
 
     }
