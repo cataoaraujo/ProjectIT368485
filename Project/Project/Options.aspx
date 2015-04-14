@@ -1,6 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="Options.aspx.cs" Inherits="FinalProject.Options" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="Options.aspx.cs" Inherits="FinalProject.Options" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .auto-style1 {
+            height: 26px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <br />
@@ -36,6 +41,8 @@
                                     <label><%# finalStatus(Convert.ToInt32(Eval("id"))) %></label></td>
                                 <td>
                                     <label><%# presentationStatus(Convert.ToInt32(Eval("id"))) %></td>
+                                <td>
+                                    <label><%# exportToXML(Convert.ToInt32(Eval("id"))) %></td>
                             </tr>
                         </ItemTemplate>
                     </asp:ListView>

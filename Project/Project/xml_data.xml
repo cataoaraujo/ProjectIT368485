@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Projects>
+  <Project id="01">
+    <ProjectName>Testing</ProjectName>
+    <ProjectAbstract>This is for testing purpose.</ProjectAbstract>
+    <CourseNumber>IT 368/485</CourseNumber>
+    <Semester>Spring 2015</Semester>
+    <LiveLink>http://iis.it.ilstu.edu/485spr15/it4850103/App3/</LiveLink>
+    <Screencasst>http://iis.it.ilstu.edu/485spr15/it4850103/App3/</Screencasst>
+    <Keyword>testing</Keyword>
+    <CommitteeChair>Testing</CommitteeChair>
+    <CommitteeChairEmail>bfan@ilstu.edu</CommitteeChairEmail>
+    <CommitteeMember1>Testing1</CommitteeMember1>
+    <CommitteeMemeber1Email>abc@abc.com</CommitteeMemeber1Email>
+    <CommitteeMember2>Testing2</CommitteeMember2>
+    <CommitteeMemeber2Email>def@def.com</CommitteeMemeber2Email>
+    <CommitteeAdvisor>Testing3</CommitteeAdvisor>
+    <CommitteeAdvisorEmail>abc123@abc123.com</CommitteeAdvisorEmail>
+  </Project>
+</Projects>

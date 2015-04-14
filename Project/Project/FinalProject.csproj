@@ -72,6 +72,7 @@
     <Content Include="Login.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="Options.aspx" />
+    <Content Include="PrintFlyer.aspx" />
     <Content Include="ProjectDetail.aspx" />
     <Content Include="RetrievePassword.aspx" />
     <Content Include="signup.aspx" />
@@ -160,6 +161,13 @@
     </Compile>
     <Compile Include="Options.aspx.designer.cs">
       <DependentUpon>Options.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PrintFlyer.aspx.cs">
+      <DependentUpon>PrintFlyer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrintFlyer.aspx.designer.cs">
+      <DependentUpon>PrintFlyer.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProjectDetail.aspx.cs">
       <DependentUpon>ProjectDetail.aspx</DependentUpon>
