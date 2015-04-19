@@ -21,17 +21,9 @@
                 <a class="navbar-brand" href="Default.aspx">Thesis Submission</a>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav pull-right">
-                        <%if (Session["user"] == null) { %>
-                        <li><a href="login.aspx">Login</a></li>
-                        <%} else {
-                              FinalProject.Model.User u = (FinalProject.Model.User)Session["user"];
-                              if (u.type.ToLower().Equals("admin")) {
+                        <%
+                            Response.Write(getTabs());
                         %>
-                            <li><a href="Dashboard.aspx">Dashboard</a></li>
-                        <%    } %>
-                        <li><a href="Options.aspx">Options</a></li>
-                        <li><a href="Logout.aspx">Logout</a></li>
-                        <%} %>
                     </ul>
                 </div>
             </div>

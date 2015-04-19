@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="FinalProject.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="FinalProject.Default2" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
@@ -7,7 +7,7 @@
     <br />
     <br />
     <br />
-    <form id="form1" runat="server">
+    
     <div class="jumbotron">
       <h1>Thesis/Project</h1>
       <p>This is a piece of the summary</p>
@@ -32,5 +32,5 @@
                 </asp:UpdatePanel>
       <p><a class="btn btn-primary btn-lg" href="#" role="button">See More</a></p>
     </div>
-    </form>
+    
 </asp:Content>
