@@ -92,3 +92,83 @@ keyword_id int NOT NULL,
 email varchar(45) NOT NULL,
 primary key(keyword_id, email)
 );
+
+
+------------------------------PROCEDURE------------------------------
+CREATE PROCEDURE InsertProjectStatistics
+@ProjectId int,
+@Type varchar(25)
+AS
+BEGIN
+DECLARE @Cnt int
+if( @Type='View')
+BEGIN
+      if exists(select * from ProjectStatistics where project_id=@ProjectId)
+            BEGIN
+                  SET @Cnt=0
+                  SET @Cnt=(select  views from ProjectStatistics where project_id=@ProjectId)
+                 
+                  update   ProjectStatistics set views=(@Cnt+1) where project_id=@ProjectId
+            END
+      ELSE
+            BEGIN
+            insert into ProjectStatistics (project_id, views, downloads)
+            values(@ProjectId,1,0)
+            END
+END
+ 
+if( @Type='DownLoad')
+BEGIN
+      if exists(select * from ProjectStatistics where project_id=1)
+            BEGIN
+                  SET @Cnt=0
+                  SET @Cnt=(select  downloads  from ProjectStatistics where project_id=1)
+                  update   ProjectStatistics set downloads=(@Cnt+1) where project_id=@ProjectId
+            END
+      ELSE
+            BEGIN
+            insert into ProjectStatistics (project_id, views, downloads)
+            values(@ProjectId,0,1)
+            END
+END
+END
+
+CREATE PROCEDURE [dbo].[UpdateProjectDetails] 
+@ProjectID int,
+@name varchar(128),
+@student_id int,
+@courseNumber int,
+@liveLink varchar(MAX),
+@abstract varchar(MAX),
+@screencastLink text,
+@semester varchar(20)
+AS
+BEGIN
+Update Project
+set name=@name,
+courseNumber=@courseNumber,
+liveLink=@liveLink,
+abstract=@abstract,
+screencastLink=@screencastLink,
+semester=@semester
+where ID=@ProjectID
+END
+
+
+-- SearchProject 'java'
+CREATE PROCEDURE SearchProject
+@KeyWord varchar(MAx)
+AS
+BEGIN
+select   P.id, P.name, P.student_id, P.courseNumber,
+ P.liveLink, P.abstract, P.screencastLink, P.semester, 
+ P.dateCreated, P.highlighted,Ky.keyword,DS.documentName,DS.documentLink  from Project P
+   left join ProjectSubmission PD on P.id=PD.project_id 
+   left join documents DS on DS.id=PD.document_id
+    join ProjectKeywords PK on P.id=PK.project_id 
+   join Keyword Ky on Ky.id=PK.keyword_id
+  WHERE     (Ky.keyword LIKE '%' + @KeyWord + '%') OR
+                      (P.courseNumber LIKE '%' + @KeyWord + '%') OR
+                      (P.abstract LIKE '%' + @KeyWord + '%') OR
+                      (P.semester LIKE '%' + @KeyWord + '%')
+  END

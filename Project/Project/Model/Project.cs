@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -148,7 +149,71 @@ namespace FinalProject.Model {
             return Situation.NotAvailable;
         }
 
-        
+
+        public static List<Project> findByKeyword(string keyword) {
+            List<Project> projects = new List<Project>();
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try {
+                dbConnection.Open();
+                string SQLString = "SELECT DISTINCT Project.id " +
+                                   "FROM Project, ProjectKeywords, Keyword " +
+                                   "WHERE Project.id = ProjectKeywords.project_id AND Keyword.id = ProjectKeywords.keyword_id " +
+                                   "AND (Project.courseNumber LIKE @KeyWord) " +
+                                   "OR (Project.abstract LIKE @KeyWord) " +
+                                   "OR (Project.semester LIKE @KeyWord) " +
+                                   "OR (Project.name LIKE @KeyWord) " +
+                                   "OR (Keyword.keyword LIKE @KeyWord)";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                command.Parameters.AddWithValue("KeyWord", "%" + keyword + "%");
+                SqlDataReader result = command.ExecuteReader();
+                while (result.Read()) {
+                    Project p = Project.findById(Convert.ToInt32(result["id"].ToString()));
+                    projects.Add(p);
+                }
+            } catch (SqlException exception) {
+                string e = exception.ToString();
+            }
+            return projects;
+        }
+
+        public void addViews() {
+            try {
+                SqlConnection connAppSave = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString);
+                SqlCommand cmdAppSave;
+                connAppSave.Open();
+
+                cmdAppSave = new SqlCommand("InsertProjectStatistics", connAppSave);
+                cmdAppSave.CommandType = CommandType.StoredProcedure;
+                cmdAppSave.Parameters.AddWithValue("@projectid", id);
+                cmdAppSave.Parameters.AddWithValue("@Type", "View");
+                int i = cmdAppSave.ExecuteNonQuery();
+                if (i > 0) {
+                    connAppSave.Close();
+                }
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        public void addDownloads() {
+            try {
+                SqlConnection connAppSave = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString);
+                SqlCommand cmdAppSave;
+                connAppSave.Open();
+
+                cmdAppSave = new SqlCommand("InsertProjectStatistics", connAppSave);
+                cmdAppSave.CommandType = CommandType.StoredProcedure;
+                cmdAppSave.Parameters.AddWithValue("@projectid", id);
+                cmdAppSave.Parameters.AddWithValue("@Type", "DownLoad");
+                int i = cmdAppSave.ExecuteNonQuery();
+                if (i > 0) {
+                    connAppSave.Close();
+                }
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
 
         public static Project findById(int id) {
             Project p = null;
@@ -164,7 +229,7 @@ namespace FinalProject.Model {
                     p = new Project();
                     p.id = Convert.ToInt32(result["id"].ToString());
                     p.name = result["name"].ToString();
-                    //p.user = User.;
+                    p.user = User.findById(Convert.ToInt32(result["student_id"]));
                     p.courseNumber = result["courseNumber"].ToString();
                     p.liveLink = result["liveLink"].ToString();
                     p.projectAbstract = result["abstract"].ToString();
@@ -177,6 +242,31 @@ namespace FinalProject.Model {
 
             }
             return p;
+        }
+
+        public bool update() {
+            bool flag = false;
+            SqlConnection dbConnection = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString);
+
+            dbConnection.Open();
+            string UpdateProjectDetails = "UPDATE Project SET name=@name,courseNumber=@courseNumber,liveLink=@liveLink,abstract=@abstract,semester=@semester,screencastLink=@screencastLink WHERE  id = @id;";
+            try {
+                SqlCommand command = new SqlCommand(UpdateProjectDetails, dbConnection);
+                command.Parameters.AddWithValue("name", name);
+                command.Parameters.AddWithValue("courseNumber", courseNumber);
+                command.Parameters.AddWithValue("liveLink", liveLink);
+                command.Parameters.AddWithValue("abstract", projectAbstract);
+                command.Parameters.AddWithValue("semester", semester);
+                command.Parameters.AddWithValue("screencastLink", screencastLink);
+                command.Parameters.AddWithValue("id", id);
+                if (command.ExecuteNonQuery() >= 0) {
+                    flag = true;
+                }
+            } catch (Exception exception) {
+
+            }
+
+            return flag;
         }
 
         public bool add() {
@@ -280,59 +370,50 @@ namespace FinalProject.Model {
 
             }
         }
-        
-        public string highlightProject()
-        {
+
+        public string highlightProject() {
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
-            try
-            {
+            try {
                 dbConnection.Open();
                 string SQLString = "Update Project Set highlighted = 'True' where id in (Select project_id from ProjectStatistics where views=(Select Max(views) from ProjectStatistics) )";
                 string SQLStr = "Update Project Set highlighted = 'False' where id in (Select project_id from ProjectStatistics where ((views<(Select Max(views) from ProjectStatistics))and (downloads<(Select Max(downloads) from ProjectStatistics))))";
                 //string SQLStr = "Update Project Set highlighted = 'False' where id in (Select project_id from ProjectStatistics where views<(Select Max(views) from ProjectStatistics))";
                 string SQLString2 = "Update Project Set highlighted = 'True' where id in (Select project_id from ProjectStatistics where downloads=(Select Max(downloads) from ProjectStatistics) )";
-                
+
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 SqlCommand cmd = new SqlCommand(SQLStr, dbConnection);
                 SqlCommand command2 = new SqlCommand(SQLString2, dbConnection);
-                
+
                 command.ExecuteNonQuery();
                 command2.ExecuteNonQuery();
                 cmd.ExecuteNonQuery();
                 return "true";
-            }
-            catch (Exception exception)
-            {
+            } catch (Exception exception) {
                 Console.Write("<br/><br/><br/><br/><br/><br/><br/><br/>" + exception.Message);
                 return exception.Message;
-                
+
             }
         }
 
-        public string showHighlights()
-        {
+        public string showHighlights() {
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
-            try
-            {
+            try {
                 dbConnection.Open();
                 string result = null;
 
                 string SQLString = "SELECT * FROM Project where highlighted ='True'";
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
+                while (reader.Read()) {
                     result = result + "<h2>" + Convert.ToString(reader["name"]) + "</h2>" + "<br/>" + "Abstract: " + Convert.ToString(reader["abstract"]) + "<br/>" +
-                           "<a href='" + Convert.ToString(reader["livelink"]) + "'>" + Convert.ToString(reader["livelink"]) + "</a>"+
+                           "<a href='" + Convert.ToString(reader["livelink"]) + "'>" + Convert.ToString(reader["livelink"]) + "</a>" +
                          "<br/><a href='ViewDetails.aspx?id=" + Convert.ToString(reader["id"]) + "'>View Details</a>" + "<br/><br/><hr>";
                 }
-                
+
                 return result;
-            }
-            catch (Exception exception)
-            {
+            } catch (Exception exception) {
                 Console.Write("<br/><br/><br/><br/><br/><br/><br/><br/>" + exception.Message);
                 return exception.Message;
 

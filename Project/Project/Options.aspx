@@ -34,7 +34,7 @@
                     <asp:ListView ID="ProjectList" runat="server" RepeatDirection="Horizontal">
                         <ItemTemplate>
                             <tr>
-                                <td><a href="ProjectDetail.aspx?id=<%# Eval("id") %>"><b><%# Eval("name") %></b></a></td>
+                                <td><a href="Viewprojectdetails.aspx?PrjId=<%# Eval("id") %>"><b><%# Eval("name") %></b></a></td>
                                 <td>
                                     <label><%# preliminaryStatus(Convert.ToInt32(Eval("id"))) %></label></td>
                                 <td>

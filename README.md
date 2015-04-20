@@ -23,9 +23,9 @@ Details: Course #, live link, keywords, abstract, documentation in Word/PDF, scr
 
 * [ ] Search for Thesis/Project
 
-* [ ] View Details (of a Thesis/Project)
+* [x] View Details (of a Thesis/Project)
 
-* [ ] Update Details (of a Thesis/Project)
+* [x] Update Details (of a Thesis/Project)
 
 * [ ] Show Similar Thesis/Project
 

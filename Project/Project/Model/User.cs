@@ -23,6 +23,34 @@ namespace FinalProject.Model {
             projects = new List<Project>();
         }
 
+        public static User findById(int id) {
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try {
+                dbConnection.Open();
+                string SQLString = "SELECT * FROM UserAccount WHERE id = @id";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                command.Parameters.AddWithValue("id", id);
+                SqlDataReader result = command.ExecuteReader();
+                while (result.Read()) {
+                    User u = new User();
+                    u.id = Convert.ToInt32(result["id"].ToString());
+                    u.firstName = result["firstName"].ToString();
+                    u.lastName = result["lastName"].ToString();
+                    u.userID = result["userID"].ToString();
+                    u.email = result["email"].ToString();
+                    u.securityQuestion = result["securityQuestion"].ToString();
+                    u.securityAnswer = result["securityAnswer"].ToString();
+                    u.accountReason = result["accountReason"].ToString();
+                    u.type = result["type"].ToString();
+                    u.accountApproval = true;
+                    return u;
+                }
+            } catch (SqlException exception) {
+                throw exception;
+            }
+            return null;
+        }
         public bool projectIsMine(int projectID) {
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
