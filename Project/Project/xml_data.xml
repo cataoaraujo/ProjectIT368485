@@ -1,20 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Projects>
   <Project id="01">
-    <ProjectName>Testing</ProjectName>
-    <ProjectAbstract>dasoij</ProjectAbstract>
-    <CourseNumber>90</CourseNumber>
-    <Semester>ndsjad</Semester>
-    <LiveLink>ndas</LiveLink>
-    <Screencasst>mdasip</Screencasst>
-    <Keyword>f</Keyword>
-    <CommitteeChair>jdiaso</CommitteeChair>
-    <CommitteeChairEmail>jdoasi</CommitteeChairEmail>
-    <CommitteeMember1>;das</CommitteeMember1>
-    <CommitteeMemeber1Email>;das</CommitteeMemeber1Email>
-    <CommitteeMember2>123</CommitteeMember2>
-    <CommitteeMemeber2Email>309</CommitteeMemeber2Email>
-    <CommitteeAdvisor>[das</CommitteeAdvisor>
-    <CommitteeAdvisorEmail>dsa]</CommitteeAdvisorEmail>
+    <ProjectName>Admin Project</ProjectName>
+    <ProjectAbstract>This is my Abstract</ProjectAbstract>
+    <CourseNumber>it368-1</CourseNumber>
+    <Semester>Spring</Semester>
+    <LiveLink>
+    </LiveLink>
+    <Screencasst>
+    </Screencasst>
+    <Keyword>spring</Keyword>
+    <CommitteeChair>a</CommitteeChair>
+    <CommitteeChairEmail>a@a.com</CommitteeChairEmail>
+    <CommitteeMember1>b</CommitteeMember1>
+    <CommitteeMemeber1Email>b@b.com</CommitteeMemeber1Email>
+    <CommitteeMember2>c</CommitteeMember2>
+    <CommitteeMemeber2Email>c@c.com</CommitteeMemeber2Email>
+    <CommitteeAdvisor>dd</CommitteeAdvisor>
+    <CommitteeAdvisorEmail>d@d.com</CommitteeAdvisorEmail>
   </Project>
 </Projects>
