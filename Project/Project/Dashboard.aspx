@@ -10,6 +10,8 @@
     <div class="container well">
         
             <div>
+                <a class="btn btn-primary btn-lg" href="AccountApproval.aspx">Account Approval</a>
+
                 <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
                     <asp:View ID="View1" runat="server">
                         <p>List Thesis/Projects by:</p>

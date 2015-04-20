@@ -32,7 +32,7 @@ namespace FinalProject
             {
                 int index = Convert.ToInt32(e.CommandArgument);
                 GridViewRow row = GridView1.Rows[index];
-                userID = row.Cells[0].Text;
+                userID = row.Cells[2].Text;
                 
                 approval = u.approveAccount(userID);
                 

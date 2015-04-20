@@ -7,7 +7,7 @@
     <br />
     <br />
 
-    <div>
+    <div class="container well">
         <h3>Approve an Account</h3>
         <br />
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource2" 
@@ -31,7 +31,7 @@
             <SortedDescendingCellStyle BackColor="#E5E5E5" />
             <SortedDescendingHeaderStyle BackColor="#242121" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:it368485_FinalProjectConnectionString %>" SelectCommand="SELECT DISTINCT [firstName], [lastName], [userID], [type], [accountReason] FROM [UserAccount] WHERE ([accountApproval] IS NULL)">
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Database %>" SelectCommand="SELECT DISTINCT [firstName], [lastName], [userID], [type], [accountReason] FROM [UserAccount] WHERE ([accountApproval] = 'False')">
         </asp:SqlDataSource>
         <asp:Label ID="Label1" runat="server"></asp:Label>
     </div>

@@ -6,7 +6,7 @@
     <br />
     <br />
     <br />
-    <div>
+    <div class="container well">
         <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">
             <asp:View ID="View1" runat="server">
 

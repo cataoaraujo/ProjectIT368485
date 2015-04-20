@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Projects>
   <Project id="01">
-    <ProjectName>Admin Project</ProjectName>
-    <ProjectAbstract>This is my Abstract</ProjectAbstract>
-    <CourseNumber>it368-1</CourseNumber>
-    <Semester>Spring</Semester>
+    <ProjectName>Test3</ProjectName>
+    <ProjectAbstract>test</ProjectAbstract>
+    <CourseNumber>test</CourseNumber>
+    <Semester>test</Semester>
     <LiveLink>
     </LiveLink>
     <Screencasst>
     </Screencasst>
-    <Keyword>spring</Keyword>
-    <CommitteeChair>a</CommitteeChair>
-    <CommitteeChairEmail>a@a.com</CommitteeChairEmail>
-    <CommitteeMember1>b</CommitteeMember1>
-    <CommitteeMemeber1Email>b@b.com</CommitteeMemeber1Email>
-    <CommitteeMember2>c</CommitteeMember2>
-    <CommitteeMemeber2Email>c@c.com</CommitteeMemeber2Email>
-    <CommitteeAdvisor>dd</CommitteeAdvisor>
-    <CommitteeAdvisorEmail>d@d.com</CommitteeAdvisorEmail>
+    <Keyword>test</Keyword>
+    <CommitteeChair>l</CommitteeChair>
+    <CommitteeChairEmail>l</CommitteeChairEmail>
+    <CommitteeMember1>j</CommitteeMember1>
+    <CommitteeMemeber1Email>j</CommitteeMemeber1Email>
+    <CommitteeMember2>k</CommitteeMember2>
+    <CommitteeMemeber2Email>k</CommitteeMemeber2Email>
+    <CommitteeAdvisor>h</CommitteeAdvisor>
+    <CommitteeAdvisorEmail>h</CommitteeAdvisorEmail>
   </Project>
 </Projects>
