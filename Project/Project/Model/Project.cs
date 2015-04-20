@@ -409,7 +409,7 @@ namespace FinalProject.Model {
                 while (reader.Read()) {
                     result = result + "<h2>" + Convert.ToString(reader["name"]) + "</h2>" + "<br/>" + "Abstract: " + Convert.ToString(reader["abstract"]) + "<br/>" +
                            "<a href='" + Convert.ToString(reader["livelink"]) + "'>" + Convert.ToString(reader["livelink"]) + "</a>" +
-                         "<br/><a href='ViewDetails.aspx?id=" + Convert.ToString(reader["id"]) + "'>View Details</a>" + "<br/><br/><hr>";
+                         "<br/><a href='Viewprojectdetails.aspx?PrjId=" + Convert.ToString(reader["id"]) + "'>View Details</a>" + "<br/><br/><hr>";
                 }
 
                 return result;

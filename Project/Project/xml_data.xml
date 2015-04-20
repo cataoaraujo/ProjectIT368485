@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Projects>
   <Project id="01">
-    <ProjectName>Test3</ProjectName>
-    <ProjectAbstract>test</ProjectAbstract>
-    <CourseNumber>test</CourseNumber>
-    <Semester>test</Semester>
+    <ProjectName>Demo Project</ProjectName>
+    <ProjectAbstract>This is my Abstract</ProjectAbstract>
+    <CourseNumber>it368</CourseNumber>
+    <Semester>spring</Semester>
     <LiveLink>
     </LiveLink>
     <Screencasst>
     </Screencasst>
-    <Keyword>test</Keyword>
-    <CommitteeChair>l</CommitteeChair>
-    <CommitteeChairEmail>l</CommitteeChairEmail>
-    <CommitteeMember1>j</CommitteeMember1>
-    <CommitteeMemeber1Email>j</CommitteeMemeber1Email>
-    <CommitteeMember2>k</CommitteeMember2>
-    <CommitteeMemeber2Email>k</CommitteeMemeber2Email>
-    <CommitteeAdvisor>h</CommitteeAdvisor>
-    <CommitteeAdvisorEmail>h</CommitteeAdvisorEmail>
+    <Keyword>project</Keyword>
+    <CommitteeChair>rodrigo</CommitteeChair>
+    <CommitteeChairEmail>rodrigo@ilstu.edu</CommitteeChairEmail>
+    <CommitteeMember1>agdge</CommitteeMember1>
+    <CommitteeMemeber1Email>agdge@ilstu.edu</CommitteeMemeber1Email>
+    <CommitteeMember2>agoswam</CommitteeMember2>
+    <CommitteeMemeber2Email>agoswam@ilstu.edu</CommitteeMemeber2Email>
+    <CommitteeAdvisor>bin</CommitteeAdvisor>
+    <CommitteeAdvisorEmail>bfan@ilstu.edu</CommitteeAdvisorEmail>
   </Project>
 </Projects>
