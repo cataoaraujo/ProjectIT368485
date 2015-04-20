@@ -21,15 +21,15 @@ Details: Course #, live link, keywords, abstract, documentation in Word/PDF, scr
 
 ## Akash
 
-* [ ] Search for Thesis/Project
+* [x ] Search for Thesis/Project
 
-* [x] View Details (of a Thesis/Project)
+* [x ] View Details (of a Thesis/Project)
 
-* [x] Update Details (of a Thesis/Project)
+* [ x] Update Details (of a Thesis/Project)
 
 * [ ] Show Similar Thesis/Project
 
-* [ ] Download Thesis/Project
+* [ x] Download Thesis/Project
 
 
 ## Bin
