@@ -69,6 +69,7 @@
     <Content Include="Dashboard.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Editdetails.aspx" />
+    <Content Include="ExportToXML.aspx" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\jquery-2.1.3.min.js" />
     <Content Include="Login.aspx" />
@@ -146,6 +147,13 @@
     </Compile>
     <Compile Include="Editdetails.aspx.designer.cs">
       <DependentUpon>Editdetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExportToXML.aspx.cs">
+      <DependentUpon>ExportToXML.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExportToXML.aspx.designer.cs">
+      <DependentUpon>ExportToXML.aspx</DependentUpon>
     </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

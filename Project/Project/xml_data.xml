@@ -3,10 +3,9 @@
   <Project id="01">
     <ProjectName>Demo Project</ProjectName>
     <ProjectAbstract>This is my Abstract</ProjectAbstract>
-    <CourseNumber>it368</CourseNumber>
+    <CourseNumber>it368 </CourseNumber>
     <Semester>spring</Semester>
-    <LiveLink>
-    </LiveLink>
+    <LiveLink>www.google.com</LiveLink>
     <Screencasst>
     </Screencasst>
     <Keyword>project</Keyword>
