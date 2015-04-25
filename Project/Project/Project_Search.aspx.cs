@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using FinalProject.Model;
 
 namespace Project_search
 {
@@ -82,6 +83,7 @@ namespace Project_search
         }
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            Project p = new Project();
             if (e.CommandName == "View")
             {
                 GridViewRow gvRow = (GridViewRow)((Control)e.CommandSource).NamingContainer;
@@ -89,6 +91,7 @@ namespace Project_search
                 Label Lblprojectid = (Label)gvRow.FindControl("Lblprojectid");
                 int ProjectId = Convert.ToInt32(Lblprojectid.Text.Trim());
                 Insert_ProjectStatistics(ProjectId, "View");
+                 p.highlightProject();
             }
 
             if (e.CommandName == "download")
@@ -102,6 +105,7 @@ namespace Project_search
 
                 int ProjectId = Convert.ToInt32(Lblprojectid.Text.Trim());
                 Insert_ProjectStatistics(ProjectId, "DownLoad");
+                 p.highlightProject();
 
                 string fileName = "test.txt";
                // string fileName = LbldocumentName.Text;
