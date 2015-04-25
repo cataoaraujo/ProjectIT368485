@@ -282,7 +282,7 @@ namespace FinalProject.Model {
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
                 dbConnection.Open();
-                string SQLString = "INSERT INTO Project VALUES(@name, @student_id, @courseNumber, @liveLink, @abstract, @screencastLink, @semester, @dateCreated, 'False', @presentationDate, @presentationPlace); SELECT SCOPE_IDENTITY () As NewID;";
+                string SQLString = "INSERT INTO Project VALUES(@name, @student_id, @courseNumber, @liveLink, @abstract, @screencastLink, @semester, @dateCreated, 'False', null, null); SELECT SCOPE_IDENTITY () As NewID;";
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 command.Parameters.AddWithValue("name", name);
                 command.Parameters.AddWithValue("student_id", user.id);
@@ -293,8 +293,8 @@ namespace FinalProject.Model {
                 command.Parameters.AddWithValue("semester", semester);
                 command.Parameters.AddWithValue("dateCreated", DateTime.Now);
 
-                command.Parameters.AddWithValue("presentationDate", null);
-                command.Parameters.AddWithValue("presentationPlace", null);
+                //command.Parameters.AddWithValue("presentationDate", null);
+                //command.Parameters.AddWithValue("presentationPlace", null);
 
                 SqlDataReader reader = command.ExecuteReader();
 

@@ -25,7 +25,9 @@ abstract TEXT,
 screencastLink TEXT,
 semester varchar(20),
 dateCreated DATETIME DEFAULT GETDATE(),
-highlighted bit
+highlighted bit,
+presentationDate TIMESTAMP,
+presentationPlace varchar(20)
 );
 
 CREATE TABLE Committee
