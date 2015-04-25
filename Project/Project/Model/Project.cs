@@ -381,7 +381,7 @@ namespace FinalProject.Model {
             }
         }
 
-        public string highlightProject() {
+        public void highlightProject() {
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
@@ -398,10 +398,10 @@ namespace FinalProject.Model {
                 command.ExecuteNonQuery();
                 command2.ExecuteNonQuery();
                 cmd.ExecuteNonQuery();
-                return "true";
+                //return "true";
             } catch (Exception exception) {
                 Console.Write("<br/><br/><br/><br/><br/><br/><br/><br/>" + exception.Message);
-                return exception.Message;
+                //return exception.Message;
 
             }
         }
