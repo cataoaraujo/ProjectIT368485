@@ -80,7 +80,7 @@ namespace FinalProject.Model {
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 command.Parameters.AddWithValue("student_id", id);
                 SqlDataReader result = command.ExecuteReader();
-                while(result.Read()) {
+                while (result.Read()) {
                     Project p = new Project();
                     p.id = Convert.ToInt32(result["id"].ToString());
                     p.name = result["name"].ToString();
@@ -92,6 +92,11 @@ namespace FinalProject.Model {
                     p.semester = result["semester"].ToString();
                     p.dateCreated = Convert.ToDateTime(result["dateCreated"].ToString());
                     p.highlighted = Convert.ToBoolean(result["highlighted"]);
+                    string date = result["presentationDate"].ToString();
+                    if (result.IsDBNull(9)) {
+                        p.presentationDate = Convert.ToDateTime(date);
+                    }
+                    p.presentationPlace = result["presentationPlace"].ToString();
                     projects.Add(p);
                 }
             } catch (SqlException exception) {
@@ -125,27 +130,27 @@ namespace FinalProject.Model {
                 dbConnection.Open();
                 string SQLString = "INSERT INTO UserAccount VALUES(@firstName, @lastName, @userID, @password, @email, @securityQuestion, @securityAnswer, @accountReason, @type, @approval); SELECT SCOPE_IDENTITY () As NewID;";
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
-                command.Parameters.AddWithValue("firstName",firstName);
-                command.Parameters.AddWithValue("lastName",lastName);
-                command.Parameters.AddWithValue("userID",userID);
-                command.Parameters.AddWithValue("password",password);
-                command.Parameters.AddWithValue("email",email);
-                command.Parameters.AddWithValue("securityQuestion",securityQuestion);
-                command.Parameters.AddWithValue("securityAnswer",securityAnswer);
-                command.Parameters.AddWithValue("accountReason",accountReason);
-                command.Parameters.AddWithValue("type","user");
-                command.Parameters.AddWithValue("approval","False");
+                command.Parameters.AddWithValue("firstName", firstName);
+                command.Parameters.AddWithValue("lastName", lastName);
+                command.Parameters.AddWithValue("userID", userID);
+                command.Parameters.AddWithValue("password", password);
+                command.Parameters.AddWithValue("email", email);
+                command.Parameters.AddWithValue("securityQuestion", securityQuestion);
+                command.Parameters.AddWithValue("securityAnswer", securityAnswer);
+                command.Parameters.AddWithValue("accountReason", accountReason);
+                command.Parameters.AddWithValue("type", "user");
+                command.Parameters.AddWithValue("approval", "False");
                 SqlDataReader reader = command.ExecuteReader();
 
                 if (reader.HasRows) {
                     reader.Read();
                     id = Convert.ToInt32(reader["NewID"]);
                     flag = true;
-                }
+                };
 
                 reader.Close();
             } catch (SqlException exception) {
-                
+
             }
             return flag;
         }
@@ -214,113 +219,89 @@ namespace FinalProject.Model {
             string SQLString = "UPDATE UserAccount SET accountApproval ='True' WHERE userID = @userID";
             SqlCommand command = new SqlCommand(SQLString, dbConnection);
             command.Parameters.AddWithValue("@userID", userID);
-            try
-            {
+            try {
                 dbConnection.Open();
-                
-                if (command.ExecuteNonQuery() == 1)
-                {
+
+                if (command.ExecuteNonQuery() == 1) {
                     return true;
                 }
-            }
-            catch (SqlException exception)
-            {
-                
+            } catch (SqlException exception) {
+
             }
             return false;
         }
-        
-        public bool verifyUserID(String userID)
-        {
+
+        public bool verifyUserID(String userID) {
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
-            try
-            {
+            try {
                 dbConnection.Open();
                 string SQLString = "SELECT * FROM UserAccount WHERE userID = @userID";
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 command.Parameters.AddWithValue("userID", userID);
                 SqlDataReader result = command.ExecuteReader();
-                if (result.Read())
-                {
+                if (result.Read()) {
                     return true;
                 }
-            }
-            catch (SqlException exception)
-            {
+            } catch (SqlException exception) {
 
             }
             return false;
         }
 
-        public string getQuestion(String userID)
-        {
+        public string getQuestion(String userID) {
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
-            try
-            {
+            try {
                 dbConnection.Open();
                 string SQLString = "SELECT securityQuestion FROM UserAccount WHERE userID = @userID";
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 command.Parameters.AddWithValue("userID", userID);
                 SqlDataReader result = command.ExecuteReader();
-                if (result.Read())
-                {
+                if (result.Read()) {
                     return result[0].ToString();
                 }
-            }
-            catch (SqlException exception)
-            {
+            } catch (SqlException exception) {
 
             }
             return null;
         }
 
-        public bool checkAnswer(String userID, String securityAnswer)
-        {
+        public bool checkAnswer(String userID, String securityAnswer) {
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
-            try
-            {
+            try {
                 dbConnection.Open();
                 string SQLString = "SELECT * FROM UserAccount WHERE userID = @userID and securityAnswer = @securityAnswer ";
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 command.Parameters.AddWithValue("userID", userID);
                 command.Parameters.AddWithValue("securityAnswer", securityAnswer);
                 SqlDataReader result = command.ExecuteReader();
-                if (result.Read())
-                {
+                if (result.Read()) {
                     return true;
                 }
-            }
-            catch (SqlException exception)
-            {
+            } catch (SqlException exception) {
 
             }
             return false;
         }
 
-        public bool updatePwd(String userID,String password)
-        {
+        public bool updatePwd(String userID, String password) {
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             bool updated = false;
-            try
-            {
+            try {
                 dbConnection.Open();
                 string SQLString = "Update UserAccount set password = @password where userID=@userID ";
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 command.Parameters.AddWithValue("userID", userID);
                 command.Parameters.AddWithValue("password", password);
                 SqlDataReader result = command.ExecuteReader();
-                if (result.Read())
-                {
+                if (result.Read()) {
                     updated = true;
                 }
-                
-            }
-            catch (SqlException exception)
-            {
+
+            } catch (SqlException exception) {
 
             }
             return true;

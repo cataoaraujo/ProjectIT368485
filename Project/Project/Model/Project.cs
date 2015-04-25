@@ -17,7 +17,9 @@ namespace FinalProject.Model {
         public string semester { set; get; }
         public DateTime dateCreated { set; get; }
         public bool highlighted { set; get; }
-
+        public DateTime presentationDate { set; get; }
+        public string presentationPlace { set; get; }
+        
 
         // public List<Submissions> subms { set; get; }
         public List<Committee> committes { set; get; }
@@ -237,6 +239,11 @@ namespace FinalProject.Model {
                     p.semester = result["semester"].ToString();
                     p.dateCreated = Convert.ToDateTime(result["dateCreated"].ToString());
                     p.highlighted = Convert.ToBoolean(result["highlighted"]);
+                    string date = result["presentationDate"].ToString();
+                    if (result.IsDBNull(9)) {
+                        p.presentationDate = Convert.ToDateTime(date);
+                    }
+                    p.presentationPlace = result["presentationPlace"].ToString();
                 }
             } catch (SqlException exception) {
 
@@ -275,7 +282,7 @@ namespace FinalProject.Model {
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
                 dbConnection.Open();
-                string SQLString = "INSERT INTO Project VALUES(@name, @student_id, @courseNumber, @liveLink, @abstract, @screencastLink, @semester, @dateCreated, 'False'); SELECT SCOPE_IDENTITY () As NewID;";
+                string SQLString = "INSERT INTO Project VALUES(@name, @student_id, @courseNumber, @liveLink, @abstract, @screencastLink, @semester, @dateCreated, 'False', @presentationDate, @presentationPlace); SELECT SCOPE_IDENTITY () As NewID;";
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 command.Parameters.AddWithValue("name", name);
                 command.Parameters.AddWithValue("student_id", user.id);
@@ -285,6 +292,9 @@ namespace FinalProject.Model {
                 command.Parameters.AddWithValue("screencastLink", screencastLink);
                 command.Parameters.AddWithValue("semester", semester);
                 command.Parameters.AddWithValue("dateCreated", DateTime.Now);
+
+                command.Parameters.AddWithValue("presentationDate", null);
+                command.Parameters.AddWithValue("presentationPlace", null);
 
                 SqlDataReader reader = command.ExecuteReader();
 
@@ -409,7 +419,7 @@ namespace FinalProject.Model {
                 while (reader.Read()) {
                     result = result + "<h2>" + Convert.ToString(reader["name"]) + "</h2>" + "<br/>" + "Abstract: " + Convert.ToString(reader["abstract"]) + "<br/>" +
                            "<a href='" + Convert.ToString(reader["livelink"]) + "'>" + Convert.ToString(reader["livelink"]) + "</a>" +
-                         "<br/><a href='Viewprojectdetails.aspx?PrjId=" + Convert.ToString(reader["id"]) + "'>View Details</a>" + "<br/><br/><hr>";
+                         "<br/><a href='Viewprojectdetails.aspx?PrjId=" + Convert.ToString(reader["id"]) + "'>View Details</a>" + "<br/><br/><hr/>";
                 }
 
                 return result;

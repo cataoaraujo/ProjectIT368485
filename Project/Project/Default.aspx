@@ -8,7 +8,7 @@
     <br />
 
     <div class="jumbotron">
-        <p><a class="btn btn-primary btn-lg" href="Project_Search.aspx" role="button">Search Projects</a> <a class="btn btn-success btn-lg" href="Subscribe.aspx" role="button">Subscribe</a> <a class="btn btn-danger btn-lg" href="Unsubscribe.aspx" role="button">Unubscribe</a></p>
+        
         <p></p>
 
         <h1>Thesis/Project</h1>
@@ -33,7 +33,10 @@
             </Triggers>
 
         </asp:UpdatePanel>
-
+        <p><a class="btn btn-primary btn-lg" href="Project_Search.aspx" role="button">Search Projects</a> 
+            <a class="btn btn-success btn-lg" href="Subscribe.aspx" role="button">Subscribe</a> 
+            <a class="btn btn-danger btn-lg" href="Unsubscribe.aspx" role="button">Unsubscribe</a>
+        </p>
     </div>
 
 </asp:Content>
