@@ -406,7 +406,8 @@ namespace FinalProject.Model {
             }
         }
 
-        public string showHighlights() {
+        public List<Project> showHighlights() {
+            List<Project> projects = new List<Project>();
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
@@ -417,17 +418,34 @@ namespace FinalProject.Model {
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read()) {
-                    result = result + "<h2>" + Convert.ToString(reader["name"]) + "</h2>" + "<br/>" + "Abstract: " + Convert.ToString(reader["abstract"]) + "<br/>" +
-                           "<a href='" + Convert.ToString(reader["livelink"]) + "'>" + Convert.ToString(reader["livelink"]) + "</a>" +
-                         "<br/><a href='Viewprojectdetails.aspx?PrjId=" + Convert.ToString(reader["id"]) + "'>View Details</a>" + "<br/><br/><hr/>";
+                    //result = result + "<h2>" + Convert.ToString(reader["name"]) + "</h2>" + "<br/>" + "Abstract: " + Convert.ToString(reader["abstract"]) + "<br/>" +
+                    //       "<a href='" + Convert.ToString(reader["livelink"]) + "'>" + Convert.ToString(reader["livelink"]) + "</a>" +
+                    //     "<br/><a href='Viewprojectdetails.aspx?PrjId=" + Convert.ToString(reader["id"]) + "'>View Details</a>" + "<br/><br/><hr/>";
+                    Project p = new Project();
+                    p.id = Convert.ToInt32(reader["id"].ToString());
+                    p.name = reader["name"].ToString();
+                    p.user = User.findById(Convert.ToInt32(reader["student_id"]));
+                    p.courseNumber = reader["courseNumber"].ToString();
+                    p.liveLink = reader["liveLink"].ToString();
+                    p.projectAbstract = reader["abstract"].ToString();
+                    p.screencastLink = reader["screencastLink"].ToString();
+                    p.semester = reader["semester"].ToString();
+                    p.dateCreated = Convert.ToDateTime(reader["dateCreated"].ToString());
+                    p.highlighted = Convert.ToBoolean(reader["highlighted"]);
+                    string date = reader["presentationDate"].ToString();
+                    if (reader.IsDBNull(9)) {
+                        p.presentationDate = Convert.ToDateTime(date);
+                    }
+                    p.presentationPlace = reader["presentationPlace"].ToString();
+                    projects.Add(p);
                 }
 
-                return result;
+                //return result;
             } catch (Exception exception) {
-                Console.Write("<br/><br/><br/><br/><br/><br/><br/><br/>" + exception.Message);
-                return exception.Message;
-
+                //Console.Write("<br/><br/><br/><br/><br/><br/><br/><br/>" + exception.Message);
+                //return exception.Message;
             }
+            return projects;
         }
 
 

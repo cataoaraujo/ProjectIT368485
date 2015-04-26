@@ -13,6 +13,7 @@ namespace FinalProject.js {
 
         protected string getTabs() {
             string result = "";
+            result += "<li><a class='' href='Project_Search.aspx'>Search Projects</a></li>";
             if (Session["user"] == null) { 
                 result +="<li><a href='login.aspx'>Login</a></li>";
             }else {

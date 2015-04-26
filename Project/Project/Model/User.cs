@@ -51,6 +51,37 @@ namespace FinalProject.Model {
             }
             return null;
         }
+
+        public static List<User> findAll() {
+            List<User> users = new List<User>();
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try {
+                dbConnection.Open();
+                string SQLString = "SELECT * FROM UserAccount WHERE accountApproval = 'True'";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                SqlDataReader result = command.ExecuteReader();
+                while (result.Read()) {
+                    User u = new User();
+                    u.id = Convert.ToInt32(result["id"].ToString());
+                    u.firstName = result["firstName"].ToString();
+                    u.lastName = result["lastName"].ToString();
+                    u.userID = result["userID"].ToString();
+                    u.email = result["email"].ToString();
+                    u.securityQuestion = result["securityQuestion"].ToString();
+                    u.securityAnswer = result["securityAnswer"].ToString();
+                    u.accountReason = result["accountReason"].ToString();
+                    u.type = result["type"].ToString();
+                    u.accountApproval = true;
+                    users.Add(u);
+                    
+                }
+            } catch (SqlException exception) {
+                throw exception;
+            }
+            return users;
+        }
+
         public bool projectIsMine(int projectID) {
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);

@@ -3,40 +3,42 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <br />
-    <br />
-    <br />
 
-    <div class="jumbotron">
-        
-        <p></p>
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+    <asp:Timer ID="Timer1" runat="server" OnTick="Timer1_Tick" Interval="120000">
+    </asp:Timer>
 
-        <h1>Thesis/Project</h1>
-        <p>This is a piece of the summary</p>
-        <p>
-            <h3>Highlights</h3>
-        </p>
+    <h1 style="text-align: center;">Highlights</h1>
+    <div class="container well">
 
-        <p>
-            <asp:ScriptManager ID="ScriptManager1" runat="server">
-            </asp:ScriptManager>
-        </p>
-        <asp:Timer ID="Timer1" runat="server" OnTick="Timer1_Tick" Interval="120000">
-        </asp:Timer>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 
             <ContentTemplate>
-                <asp:Label ID="Label1" runat="server" TypeMode="MultiLine"></asp:Label>
+                <div class="row">
+                    <asp:ListView ID="ProjectList" runat="server" RepeatDirection="Horizontal">
+                        <ItemTemplate>
+                            <h3></h3>
+                            <p></p>
+
+                            <div class="col-md-4">
+                                <h2><%# Eval("name") %></h2>
+                                <p><%# Eval("projectAbstract") %></p>
+                                <p><a class="btn btn-default" href="Viewprojectdetails.aspx?PrjId=<%# Eval("id") %>" role="button">View details »</a></p>
+                            </div>
+
+                        </ItemTemplate>
+                    </asp:ListView>
+                </div>
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Timer1" />
             </Triggers>
 
         </asp:UpdatePanel>
-        <p><a class="btn btn-primary btn-lg" href="Project_Search.aspx" role="button">Search Projects</a> 
-            <a class="btn btn-success btn-lg" href="Subscribe.aspx" role="button">Subscribe</a> 
-            <a class="btn btn-danger btn-lg" href="Unsubscribe.aspx" role="button">Unsubscribe</a>
-        </p>
+
     </div>
+
+
 
 </asp:Content>

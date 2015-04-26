@@ -8,9 +8,6 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <br />
-    <br />
-    <br />
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-3 well">

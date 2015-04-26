@@ -3,9 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <br />
-    <br />
-    <br />
     Show Details of the project! (get the project from the id sent by the METHOD="GET"
 
     <ul>

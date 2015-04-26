@@ -3,10 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
-    <br />
-    <br />
-    <br />
-        <div class="container well">
+        <div class="col-md-offset-3 col-md-5 container well">
              <div>
                 <asp:Label ID="errorMsg" runat="server" Text=""></asp:Label>
             </div>
