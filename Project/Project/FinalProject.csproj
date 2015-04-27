@@ -76,6 +76,7 @@
     <Content Include="Logout.aspx" />
     <Content Include="Options.aspx" />
     <Content Include="Payfordownloads.aspx" />
+    <Content Include="permissionDenied.aspx" />
     <Content Include="PrintFlyer.aspx" />
     <Content Include="ProjectDetail.aspx" />
     <Content Include="Project_Search.aspx" />
@@ -189,6 +190,13 @@
     </Compile>
     <Compile Include="Payfordownloads.aspx.designer.cs">
       <DependentUpon>Payfordownloads.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="permissionDenied.aspx.cs">
+      <DependentUpon>permissionDenied.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="permissionDenied.aspx.designer.cs">
+      <DependentUpon>permissionDenied.aspx</DependentUpon>
     </Compile>
     <Compile Include="PrintFlyer.aspx.cs">
       <DependentUpon>PrintFlyer.aspx</DependentUpon>

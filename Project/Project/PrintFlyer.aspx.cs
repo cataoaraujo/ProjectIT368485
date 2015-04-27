@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProject.Model;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
@@ -15,7 +16,18 @@ namespace FinalProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["user"] != null)
+            {
+                User u = (User)Session["user"];
+                if (!u.type.ToLower().Equals("admin"))
+                {
+                    Response.Redirect("permissionDenied.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("Login.aspx");
+            }
         }
 
         protected void GridView1_SelectedIndexChanged(object sender, GridViewCommandEventArgs e)
@@ -24,7 +36,7 @@ namespace FinalProject
             {
                 MultiView1.ActiveViewIndex = 1;
 
-                
+
             }
         }
 

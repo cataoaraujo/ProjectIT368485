@@ -12,6 +12,7 @@
                     <li class="active"><a href="Dashboard.aspx">Overview</a></li>
                     <li><a href="Reports.aspx">Reports</a></li>
                     <li><a href="AccountApproval.aspx">Account Approval</a></li>
+                    <li><a href="PrintFlyer.aspx">Print Flyer</a></li>
                 </ul>
                 <%--<ul class="nav nav-sidebar">
                     <li><a href="">Nav item</a></li>
