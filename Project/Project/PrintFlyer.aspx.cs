@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace FinalProject
@@ -14,13 +18,15 @@ namespace FinalProject
 
         }
 
-        protected void Button2_Click(object sender, EventArgs e)
+        protected void GridView1_SelectedIndexChanged(object sender, GridViewCommandEventArgs e)
         {
-            MultiView1.ActiveViewIndex = 1;
-            stdLabel.Text = stdName.Text;
-            titleLabel.Text = prjTitle.Text;
-            timeLabel.Text = schTime.Text;
-            locLabel.Text = loc.Text;
+            if (e.CommandName == "Select")
+            {
+                MultiView1.ActiveViewIndex = 1;
+
+                
+            }
         }
+
     }
 }
