@@ -27,7 +27,7 @@ Details: Course #, live link, keywords, abstract, documentation in Word/PDF, scr
 
 * [x] Update Details (of a Thesis/Project)
 
-* [ ] Show Similar Thesis/Project
+* [x] Show Similar Thesis/Project
 
 * [x] Download Thesis/Project
 
