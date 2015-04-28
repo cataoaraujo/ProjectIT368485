@@ -334,11 +334,10 @@ namespace FinalProject.Model {
                 command.Parameters.AddWithValue("userID", userID);
                 SqlDataReader result = command.ExecuteReader();
                 if (result.Read()) {
-                    dbConnection.Close();
                     return result[0].ToString();
-                } else {
-                    dbConnection.Close();
                 }
+                dbConnection.Close();
+
             } catch (SqlException exception) {
 
             }

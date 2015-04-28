@@ -28,7 +28,6 @@
             .hero-widget label {
                 font-size: 17px;
             }
-
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
@@ -44,84 +43,93 @@
                 </ul>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <h1 class="page-header">Dashboard</h1>
-                <div class="col-sm-3">
-                    <div class="hero-widget">
-                        <div class="icon">
-                            <i class="glyphicon glyphicon-user"></i>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1>Dashboard</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-sm-3">
+                            <div class="hero-widget">
+                                <div class="icon">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </div>
+                                <div class="text">
+                                    <var><% Response.Write(FinalProject.Model.User.countUsers()); %></var>
+                                    <label class="text-muted">Users</label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="text">
-                            <var><% Response.Write(FinalProject.Model.User.countUsers()); %></var>
-                            <label class="text-muted">Users</label>
+                        <div class="col-sm-3">
+                            <div class="hero-widget">
+                                <div class="icon">
+                                    <i class="glyphicon glyphicon-file"></i>
+                                </div>
+                                <div class="text">
+                                    <var><% Response.Write(FinalProject.Model.Project.countProjects()); %></var>
+                                    <label class="text-muted">Theses</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="hero-widget">
+                                <div class="icon">
+                                    <i class="glyphicon glyphicon-download-alt"></i>
+                                </div>
+                                <div class="text">
+                                    <var><% Response.Write(FinalProject.Model.Project.countTotalDownloads()); %></var>
+                                    <label class="text-muted">Downloads</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="hero-widget ">
+                                <div class="icon">
+                                    <i class="glyphicon glyphicon-stats"></i>
+                                </div>
+                                <div class="text">
+                                    <var><% Response.Write(FinalProject.Model.Project.countTotalViews()); %></var>
+                                    <label class="text-muted">Views</label>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="panel-heading">
+                            <h1>Users</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>UserID</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <asp:ListView ID="UserList" runat="server" RepeatDirection="Horizontal">
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <td><%# Eval("id") %></td>
+                                                    <td><%# Eval("firstName") %></td>
+                                                    <td><%# Eval("lastName") %></td>
+                                                    <td><%# Eval("userid") %></td>
+                                                    <td><%# Eval("email") %></td>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:ListView>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="hero-widget">
-                        <div class="icon">
-                            <i class="glyphicon glyphicon-file"></i>
-                        </div>
-                        <div class="text">
-                            <var><% Response.Write(FinalProject.Model.Project.countProjects()); %></var>
-                            <label class="text-muted">Theses</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="hero-widget">
-                        <div class="icon">
-                            <i class="glyphicon glyphicon-download-alt"></i>
-                        </div>
-                        <div class="text">
-                            <var><% Response.Write(FinalProject.Model.Project.countTotalDownloads()); %></var>
-                            <label class="text-muted">Downloads</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="hero-widget ">
-                        <div class="icon">
-                            <i class="glyphicon glyphicon-stats"></i>
-                        </div>
-                        <div class="text">
-                            <var><% Response.Write(FinalProject.Model.Project.countTotalViews()); %></var>
-                            <label class="text-muted">Views</label>
-                        </div>
-                    </div>
-                </div>
-
-                <h2 class="sub-header">Users</h2>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>UserID</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <asp:ListView ID="UserList" runat="server" RepeatDirection="Horizontal">
-                                <ItemTemplate>
-                                    <tr>
-                                        <td><%# Eval("id") %></td>
-                                        <td><%# Eval("firstName") %></td>
-                                        <td><%# Eval("lastName") %></td>
-                                        <td><%# Eval("userid") %></td>
-                                        <td><%# Eval("email") %></td>
-                                    </tr>
-                                </ItemTemplate>
-                            </asp:ListView>
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
-    </div>
 
-    <%-- <div class="container well">
+        <%-- <div class="container well">
         
             <div>
                 <asp:MultiView ID="MultiView1" runat="server" ActiveViewIndex="0">

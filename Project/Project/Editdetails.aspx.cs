@@ -28,7 +28,7 @@ namespace Project_search
 
                 SqlConnection Dbconnect = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString);
                 String Project_ID = Request.QueryString["PrjId"];
-                Response.Write("Details of this project is given below : " + "</br>");
+                //Response.Write("Details of this project is given below : " + "</br>");
                 String sqlcmd = "Select * from project where id=" + "'" + Project_ID + "'";
                 try
                 {
@@ -116,7 +116,7 @@ namespace Project_search
             //}
 
 
-            this.form1.Visible = false;
+            //this.form1.Visible = false;
             int ProjectID = Convert.ToInt32(TextBox_PID.Text);
             string name = TextBox_name.Text;
             string courseNumber = TextBox_CourseNumber.Text;

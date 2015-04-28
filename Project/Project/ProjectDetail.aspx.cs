@@ -11,9 +11,9 @@ namespace FinalProject {
         Project project;
         protected void Page_Load(object sender, EventArgs e) {
             if (Session["user"] == null) {
-                Response.Redirect("AccessUnauthorized.aspx");
+                Response.Redirect("Login.aspx");
             } else {
-                User user = (User)Session["user"];
+                
                 int projectID = Convert.ToInt32(Request.QueryString["id"]);
                 project = Project.findById(projectID);
                 if (projectID == 0) {
@@ -21,7 +21,6 @@ namespace FinalProject {
                 }
                 DocumentList.DataSource = project.findDocuments();
                 DocumentList.DataBind();
-
             }
         }
     }
