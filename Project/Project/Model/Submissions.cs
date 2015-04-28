@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 
 namespace FinalProject.Model {
@@ -48,6 +49,34 @@ namespace FinalProject.Model {
             }
             return committeeComments;
         }
+
+        public static List<Committee> findCommittee(int projectID) {
+            List<Committee> committee = new List<Committee>();
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try {
+                dbConnection.Open();
+                string SQLString = "SELECT * " +
+                    "FROM Committee " +
+                    "WHERE project_id = @project_id";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                command.Parameters.AddWithValue("project_id", projectID);
+                SqlDataReader result = command.ExecuteReader();
+                while (result.Read()) {
+                    Committee d = new Committee();
+                    d.id = Convert.ToInt32(result["commitee_id"].ToString());
+                    d.name = result["committeeName"].ToString();
+                    d.email = result["committeeEmail"].ToString();
+                    committee.Add(d);
+                }
+                result.Close();
+                dbConnection.Close();
+            } catch (SqlException exception) {
+
+            }
+            return committee;
+        }
+
         public static bool approvalIsValid(int committeeID, int submissionID) {
             bool flag = false;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
@@ -69,8 +98,31 @@ namespace FinalProject.Model {
             }
             return flag;
         }
+        public static bool isAdvisor(int committeeID, int submissionID) {
+            bool flag = false;
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try {
+                dbConnection.Open();
+                string SQLString = "SELECT * FROM Committee, ProjectSubmission WHERE ProjectSubmission.submission_id = @submission_id AND Committee.commitee_id = @committee_id AND Committee.project_id = ProjectSubmission.project_id AND Committee.type = 'Advisor'";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                command.Parameters.AddWithValue("submission_id", submissionID);
+                command.Parameters.AddWithValue("committee_id", committeeID);
+                SqlDataReader result = command.ExecuteReader();
+                if (result.Read()) {
+                    flag = true;
+                }
+                result.Close();
+                dbConnection.Close();
+            } catch (SqlException exception) {
 
+            }
+            return flag;
+        }
         public static bool committeeApproval(int committeeID, int submissionID, bool approval, string comment="") {
+            if (isAdvisor(committeeID, submissionID)) {
+                updateSubmissionStatus(submissionID);
+            }
             bool flag = false;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
@@ -85,6 +137,27 @@ namespace FinalProject.Model {
                 if (command.ExecuteNonQuery()>0) {
                     flag = true;
                 }
+                dbConnection.Close();
+            } catch (SqlException exception) {
+
+            }
+            return flag;
+        }
+
+        public static bool updateSubmissionStatus(int submissionID) {
+            bool flag = false;
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try {
+                dbConnection.Open();
+                string SQLString = "UPDATE ProjectSubmission SET approved = 'True' WHERE submission_id = @submission_id";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                command.Parameters.AddWithValue("submission_id", submissionID);
+
+                if (command.ExecuteNonQuery() > 0) {
+                    flag = true;
+                }
+
                 dbConnection.Close();
             } catch (SqlException exception) {
 
@@ -115,10 +188,43 @@ namespace FinalProject.Model {
 
                 reader.Close();
                 dbConnection.Close();
+                sendEmailApproval();
             } catch (SqlException exception) {
 
             }
             return flag;
+        }
+
+        public bool sendEmailApproval() {
+            bool flag = false;
+            List<Committee> committees = Submissions.findCommittee(project.id);
+            foreach (Committee c in committees) {
+                sendEmail(this.project, this, c);
+            }
+
+            return flag;
+        }
+
+        private bool sendEmail(Project project, Submissions submission, Committee c) {
+            try {
+                MailMessage emailMessage = new MailMessage();
+                emailMessage.From = new MailAddress("rcataoa@ilstu.edu", "Project IT368");
+                emailMessage.To.Add(new MailAddress(c.email));
+                emailMessage.Subject = "You are requested to Approve the Project: "+project.name;
+                emailMessage.IsBodyHtml = true; 
+
+                string message = "Link to the project: Viewprojectdetails.aspx?PrjId=" + project.id +"<br />";
+                message += "Link to approve the project: Approval.aspx?cID=" + c.id + "&sID="+submission.id+" <br />";
+                emailMessage.Body = message;
+
+
+                SmtpClient mailClient = new SmtpClient("smtp.ilstu.edu");
+                mailClient.UseDefaultCredentials = true;// false;
+                mailClient.Send(emailMessage);
+            } catch (Exception e) {
+                return false;
+            }
+            return true;
         }
 
     }
