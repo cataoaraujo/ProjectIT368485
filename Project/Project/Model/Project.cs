@@ -259,14 +259,8 @@ namespace FinalProject.Model {
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
                 dbConnection.Open();
-                string SQLString = "SELECT DISTINCT Project.id " +
-                                   "FROM Project, ProjectKeywords, Keyword " +
-                                   "WHERE Project.id = ProjectKeywords.project_id AND Keyword.id = ProjectKeywords.keyword_id " +
-                                   "AND (Project.courseNumber LIKE @KeyWord) " +
-                                   "OR (Project.abstract LIKE @KeyWord) " +
-                                   "OR (Project.semester LIKE @KeyWord) " +
-                                   "OR (Project.name LIKE @KeyWord) " +
-                                   "OR (Keyword.keyword LIKE @KeyWord)";
+                string SQLString = "(SELECT PROJECT.ID AS id FROM PROJECT, ProjectKeywords, Keyword WHERE PROJECT.ID = ProjectKeywords.project_id AND Keyword.id = ProjectKeywords.keyword_id AND (Keyword.keyword) LIKE @KeyWord ) UNION (SELECT PROJECT.ID FROM PROJECT WHERE (Project.name) LIKE @KeyWord OR (Project.abstract) LIKE @KeyWord OR (Project.semester) LIKE @KeyWord OR (Project.courseNumber) LIKE @KeyWord)";
+                
                 SqlCommand command = new SqlCommand(SQLString, dbConnection);
                 command.Parameters.AddWithValue("KeyWord", "%" + keyword + "%");
                 SqlDataReader result = command.ExecuteReader();
@@ -346,6 +340,7 @@ namespace FinalProject.Model {
                     if (result.IsDBNull(9)) {
                         p.presentationDate = Convert.ToDateTime(date);
                     }
+                    p.percentageDone = p.findStatusPercentage();
                     p.presentationPlace = result["presentationPlace"].ToString();
                 }
                 result.Close();

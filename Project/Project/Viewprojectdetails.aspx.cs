@@ -15,7 +15,7 @@ namespace Project_search {
         protected Project project;
         protected void Page_Load(object sender, EventArgs e) {
             if (Session["user"] == null) {
-                Response.Redirect("AccessUnauthorized.aspx");
+                Response.Redirect("Login.aspx");
             } else {
                 int projectID = Convert.ToInt32(Request.QueryString["PrjId"]);
                 project = Project.findById(projectID);
@@ -70,6 +70,55 @@ namespace Project_search {
             //    Response.Write("<p>Error code " + exception.Number
             //        + ": " + exception.Message + "</p>");
             //}
+        }
+
+        protected string download(string id, string link) {
+
+            return link;
+        }
+
+        protected string download(string link) {
+            Insert_ProjectStatistics(project.id, "download");
+            project.highlightProject();
+            return link;
+            //Response.Redirect(link);
+        }
+        public void Insert_ProjectStatistics(int ProjectId, string Tpye) {
+            try {
+                SqlConnection connAppSave = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString);
+                // SqlConnection connAppSave = new SqlConnection(ConfigurationManager.AppSettings["PMSConnString"].ToString());
+                SqlCommand cmdAppSave;
+                connAppSave.Open();
+
+                cmdAppSave = new SqlCommand("InsertProjectStatistics", connAppSave);
+                cmdAppSave.CommandType = CommandType.StoredProcedure;
+                cmdAppSave.Parameters.AddWithValue("@projectid", ProjectId);
+                cmdAppSave.Parameters.AddWithValue("@Type", Tpye);
+                int i = cmdAppSave.ExecuteNonQuery();
+                if (i > 0) {
+                    connAppSave.Close();
+                }
+            } catch (Exception ex) {
+                throw ex;
+            }
+        }
+
+        protected void BtDown_Command(object sender, CommandEventArgs e) {
+
+
+            Button btn = (Button)sender;
+            switch (btn.CommandName) {
+                case "View":
+                    Insert_ProjectStatistics(project.id, "download");
+                    project.highlightProject();
+                    Response.Redirect("Viewprojectdetails.aspx?PrjId=" + project.id);
+                    break;
+                case "download":
+                    Insert_ProjectStatistics(project.id, "download");
+                    project.highlightProject();
+                    Response.Redirect("Viewprojectdetails.aspx?PrjId=" + project.id);
+                    break;
+            }
         }
     }
 }

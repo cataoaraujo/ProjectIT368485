@@ -78,7 +78,6 @@
     <Content Include="Payfordownloads.aspx" />
     <Content Include="permissionDenied.aspx" />
     <Content Include="PrintFlyer.aspx" />
-    <Content Include="ProjectDetail.aspx" />
     <Content Include="Project_Search.aspx" />
     <Content Include="Reports.aspx" />
     <Content Include="RetrievePassword.aspx" />
@@ -204,13 +203,6 @@
     </Compile>
     <Compile Include="PrintFlyer.aspx.designer.cs">
       <DependentUpon>PrintFlyer.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectDetail.aspx.cs">
-      <DependentUpon>ProjectDetail.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ProjectDetail.aspx.designer.cs">
-      <DependentUpon>ProjectDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="Project_Search.aspx.cs">
       <DependentUpon>Project_Search.aspx</DependentUpon>
