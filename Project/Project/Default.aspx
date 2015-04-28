@@ -15,21 +15,38 @@
         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
 
             <ContentTemplate>
-                <div class="row">
-                    <asp:ListView ID="ProjectList" runat="server" RepeatDirection="Horizontal">
-                        <ItemTemplate>
-                            <h3></h3>
-                            <p></p>
-
-                            <div class="col-md-4">
-                                <h2><%# Eval("name") %></h2>
-                                <p><%# Eval("projectAbstract") %></p>
-                                <p><a class="btn btn-default" href="Viewprojectdetails.aspx?PrjId=<%# Eval("id") %>" role="button">View details »</a></p>
-                            </div>
-
-                        </ItemTemplate>
-                    </asp:ListView>
+                <div class="container-fluid">
+                    <div class="row">
+                        <ul class="thumbnails list-unstyled">
+                            <asp:ListView ID="ProjectList" runat="server" RepeatDirection="Horizontal">
+                                <ItemTemplate>
+                                    <li class="col-md-3">
+                                        <div class="thumbnail" style="padding: 0">
+                                            <div class="caption">
+                                                <h2><%# Eval("name") %></h2>
+                                                <p><%# Eval("projectAbstract") %></p>
+                                                <p><small><span class="glyphicon glyphicon-user"></span> <%# Eval("user.firstName") %> <%# Eval("user.lastName") %></small></p>
+                                            </div>
+                                            <div class="modal-footer" style="text-align: left">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%# Eval("percentageDone") %>%;">
+                                                        <span class=""><%# Eval("percentageDone") %>% Complete</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <a class="btn btn-default btn-success" href="Viewprojectdetails.aspx?PrjId=<%# Eval("id") %>" role="button">View details »</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ItemTemplate>
+                            </asp:ListView>
+                        </ul>
+                    </div>
                 </div>
+
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="Timer1" />

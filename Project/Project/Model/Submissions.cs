@@ -41,12 +41,15 @@ namespace FinalProject.Model {
                     d.hasApproved = result["APPROVAL"].ToString();
                     committeeComments.Add(d);
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
             return committeeComments;
         }
         public static bool approvalIsValid(int committeeID, int submissionID) {
+            bool flag = false;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
@@ -57,12 +60,14 @@ namespace FinalProject.Model {
                 command.Parameters.AddWithValue("committee_id", committeeID);
                 SqlDataReader result = command.ExecuteReader();
                 if (result.Read()) {
-                    return true;
+                    flag = true;
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
-            return false;
+            return flag;
         }
 
         public static bool committeeApproval(int committeeID, int submissionID, bool approval, string comment="") {
@@ -80,6 +85,7 @@ namespace FinalProject.Model {
                 if (command.ExecuteNonQuery()>0) {
                     flag = true;
                 }
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
@@ -108,6 +114,7 @@ namespace FinalProject.Model {
                 }
 
                 reader.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }

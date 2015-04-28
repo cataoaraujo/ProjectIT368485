@@ -62,6 +62,7 @@ namespace FinalProject.Model {
                         }
                     }
                 }
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
@@ -83,6 +84,7 @@ namespace FinalProject.Model {
             return false;
         }
         public bool verifyEmail() {
+            bool flag = true;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
@@ -92,12 +94,14 @@ namespace FinalProject.Model {
                 command.Parameters.AddWithValue("@email", email);
                 SqlDataReader result = command.ExecuteReader();
                 if (result.Read()) {
-                    return false;
+                    flag = false;
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
-            return true;
+            return flag;
         }
 
         public void sendEmail() {

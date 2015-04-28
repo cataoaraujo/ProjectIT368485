@@ -1,10 +1,9 @@
-﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Project_Search.aspx.cs" Inherits="Project_search.Project_Search" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="Project_Search.aspx.cs" Inherits="Project_search.Project_Search" %>
 
-<!DOCTYPE html>
+<asp:content id="Content1" contentplaceholderid="head" runat="server">
+</asp:content>
+<asp:content id="Content2" contentplaceholderid="Content" runat="server">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
     <script language="javascript" type="text/javascript">
 
 
@@ -17,12 +16,6 @@
 
         }
             </script>
-
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-    
         <table class="auto-style1">
             <tr>
                 <td>&nbsp;</td>
@@ -98,7 +91,4 @@
             </tr>
         </table>
     
-    </div>
-    </form>
-</body>
-</html>
+</asp:Content>

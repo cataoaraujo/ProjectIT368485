@@ -19,7 +19,9 @@ namespace FinalProject.Model {
         public bool highlighted { set; get; }
         public DateTime presentationDate { set; get; }
         public string presentationPlace { set; get; }
-        
+
+        public double percentageDone { set; get; }
+
 
         // public List<Submissions> subms { set; get; }
         public List<Committee> committes { set; get; }
@@ -51,6 +53,66 @@ namespace FinalProject.Model {
             committes.Add(c);
         }
 
+        public static int countProjects() {
+            int n = 0;
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try {
+                dbConnection.Open();
+                string SQLString = "SELECT count(id) AS total FROM Project";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                SqlDataReader result = command.ExecuteReader();
+                if (result.Read()) {
+                    n = Convert.ToInt32(result["total"].ToString());
+                }
+                result.Close();
+                dbConnection.Close();
+            } catch (SqlException exception) {
+
+            }
+            return n;
+        }
+
+        public static int countTotalDownloads() {
+            int n = 0;
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try {
+                dbConnection.Open();
+                string SQLString = "Select sum(downloads) AS total from ProjectStatistics";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                SqlDataReader result = command.ExecuteReader();
+                if (result.Read()) {
+                    n = Convert.ToInt32(result["total"].ToString());
+                }
+                result.Close();
+                dbConnection.Close();
+            } catch (SqlException exception) {
+
+            }
+            return n;
+        }
+
+        public static int countTotalViews() {
+            int n = 0;
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try {
+                dbConnection.Open();
+                string SQLString = "Select sum(views) AS total from ProjectStatistics";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                SqlDataReader result = command.ExecuteReader();
+                if (result.Read()) {
+                    n = Convert.ToInt32(result["total"].ToString());
+                }
+                result.Close();
+                dbConnection.Close();
+            } catch (SqlException exception) {
+
+            }
+            return n;
+        }
+
         public List<Document> findDocuments() {
             documents = new List<Document>();
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
@@ -68,6 +130,9 @@ namespace FinalProject.Model {
                     d.link = result["documentLink"].ToString();
                     documents.Add(d);
                 }
+
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
@@ -77,6 +142,7 @@ namespace FinalProject.Model {
 
 
         public Situation preliminaryStatus() {
+            Situation s = Situation.Available;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
@@ -88,19 +154,23 @@ namespace FinalProject.Model {
                 SqlDataReader result = command.ExecuteReader();
                 if (result.Read()) {
                     if (Convert.ToBoolean(result["approved"])) {
-                        return Situation.Done;
+                        s = Situation.Done;
                     } else {
-                        return Situation.Submitted;
+                        s = Situation.Submitted;
                     }
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
-            return Situation.Available;
+            return s;
         }
 
         public Situation finalStatus() {
+            Situation s = Situation.NotAvailable;
             if (preliminaryStatus().Equals(Situation.Done)) {
+                s = Situation.Available;
                 string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
                 SqlConnection dbConnection = new SqlConnection(conf);
                 try {
@@ -112,20 +182,23 @@ namespace FinalProject.Model {
                     SqlDataReader result = command.ExecuteReader();
                     if (result.Read()) {
                         if (Convert.ToBoolean(result["approved"])) {
-                            return Situation.Done;
+                            s= Situation.Done;
                         } else {
-                            return Situation.Submitted;
+                            s= Situation.Submitted;
                         }
                     }
+                    result.Close();
+                    dbConnection.Close();
                 } catch (SqlException exception) {
 
                 }
-                return Situation.Available;
+                
             }
-            return Situation.NotAvailable;
+            return s;
         }
 
         public Situation presentationStatus() {
+            Situation s = Situation.NotAvailable;
             if (finalStatus().Equals(Situation.Done)) {
                 string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
                 SqlConnection dbConnection = new SqlConnection(conf);
@@ -138,17 +211,45 @@ namespace FinalProject.Model {
                     SqlDataReader result = command.ExecuteReader();
                     if (result.Read()) {
                         if (Convert.ToBoolean(result["approved"])) {
-                            return Situation.Done;
+                            s = Situation.Done;
                         } else {
-                            return Situation.Submitted;
+                            s = Situation.Submitted;
                         }
                     }
+                    result.Close();
+                    dbConnection.Close();
                 } catch (SqlException exception) {
 
                 }
-                return Situation.Available;
+                s = Situation.Available;
             }
-            return Situation.NotAvailable;
+            return s;
+        }
+
+        public double findStatusPercentage() {
+            Situation s1 = presentationStatus();
+            if (s1.Equals(Situation.Done)) {
+                return 100;
+            } else {
+                if(s1.Equals(Situation.Submitted)){
+                    return 83;
+                }
+                Situation s2 = finalStatus();
+                if (s2.Equals(Situation.Done)) {
+                    return 66;
+                } else {
+                    if(s2.Equals(Situation.Submitted)){
+                        return 50;
+                    }
+                    Situation s3 = preliminaryStatus();
+                    if (s3.Equals(Situation.Done)) {
+                        return 33;
+                    } else if(s3.Equals(Situation.Submitted)){
+                        return 16;
+                    }
+                }
+            }
+            return 0;
         }
 
 
@@ -173,6 +274,8 @@ namespace FinalProject.Model {
                     Project p = Project.findById(Convert.ToInt32(result["id"].ToString()));
                     projects.Add(p);
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
                 string e = exception.ToString();
             }
@@ -245,6 +348,8 @@ namespace FinalProject.Model {
                     }
                     p.presentationPlace = result["presentationPlace"].ToString();
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
@@ -269,6 +374,7 @@ namespace FinalProject.Model {
                 if (command.ExecuteNonQuery() >= 0) {
                     flag = true;
                 }
+                dbConnection.Close();
             } catch (Exception exception) {
 
             }
@@ -310,6 +416,7 @@ namespace FinalProject.Model {
                 }
 
                 reader.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
@@ -331,6 +438,7 @@ namespace FinalProject.Model {
                 }
                 selectReader.Close();
                 selectCommand.Dispose();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
@@ -352,6 +460,7 @@ namespace FinalProject.Model {
                 }
                 selectReader.Close();
                 insertCommand.Dispose();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
@@ -376,6 +485,7 @@ namespace FinalProject.Model {
                     insertProjectKeywordCommand.ExecuteNonQuery();
                     insertProjectKeywordCommand.Dispose();
                 }
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
@@ -398,6 +508,7 @@ namespace FinalProject.Model {
                 command.ExecuteNonQuery();
                 command2.ExecuteNonQuery();
                 cmd.ExecuteNonQuery();
+                dbConnection.Close();
                 //return "true";
             } catch (Exception exception) {
                 Console.Write("<br/><br/><br/><br/><br/><br/><br/><br/>" + exception.Message);
@@ -436,9 +547,12 @@ namespace FinalProject.Model {
                     if (reader.IsDBNull(9)) {
                         p.presentationDate = Convert.ToDateTime(date);
                     }
+                    p.percentageDone = p.findStatusPercentage();
                     p.presentationPlace = reader["presentationPlace"].ToString();
                     projects.Add(p);
                 }
+                reader.Close();
+                dbConnection.Close();
 
                 //return result;
             } catch (Exception exception) {

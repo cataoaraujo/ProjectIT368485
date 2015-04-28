@@ -29,6 +29,7 @@ namespace FinalProject.Model {
                 }
 
                 reader.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }

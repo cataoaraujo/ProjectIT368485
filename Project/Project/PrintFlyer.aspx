@@ -12,7 +12,6 @@
         }
 
         body {
-            background-color: #FFFFFF;
             text-align: center;
             vertical-align: central;
             margin: 0px; /* the margin on the content before printing */
@@ -50,18 +49,7 @@
                     <li><a href="AccountApproval.aspx">Account Approval</a></li>
                     <li class="active"><a href="PrintFlyer.aspx">Print Flyer</a></li>
                 </ul>
-                <%--<ul class="nav nav-sidebar">
-                    <li><a href="">Nav item</a></li>
-                    <li><a href="">Nav item again</a></li>
-                    <li><a href="">One more nav</a></li>
-                    <li><a href="">Another nav item</a></li>
-                    <li><a href="">More navigation</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li><a href="">Nav item again</a></li>
-                    <li><a href="">One more nav</a></li>
-                    <li><a href="">Another nav item</a></li>
-                </ul>--%>
+
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">Projects</h1>
@@ -86,7 +74,7 @@
                             <SortedDescendingCellStyle BackColor="#E5E5E5" />
                             <SortedDescendingHeaderStyle BackColor="#242121" />
                         </asp:GridView>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:it368485_FinalProjectConnectionString %>"
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Database %>"
                             SelectCommand="SELECT [name], [presentationDate], [presentationPlace] FROM [Project]"></asp:SqlDataSource>
                     </asp:View>
                     <asp:View ID="View2" runat="server">
@@ -121,7 +109,7 @@
                                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                                         <RowStyle BackColor="#EFF3FB" />
                                     </asp:DetailsView>
-                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:it368485_FinalProjectConnectionString %>"
+                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Database %>"
                                         SelectCommand="SELECT UserAccount.firstName, UserAccount.lastName, Project.name, Project.presentationDate, Project.presentationPlace FROM Project INNER JOIN UserAccount ON Project.student_id = UserAccount.id INNER JOIN Committee ON Project.id = Committee.project_id WHERE (Project.name = @name)">
                                         <SelectParameters>
                                             <asp:ControlParameter ControlID="GridView1" DefaultValue="GridView1.name" Name="name" PropertyName="SelectedValue" />

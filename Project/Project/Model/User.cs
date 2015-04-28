@@ -23,7 +23,29 @@ namespace FinalProject.Model {
             projects = new List<Project>();
         }
 
+
+        public static int countUsers() {
+            int n = 0;
+            string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
+            SqlConnection dbConnection = new SqlConnection(conf);
+            try {
+                dbConnection.Open();
+                string SQLString = "SELECT count(id) AS total FROM UserAccount WHERE accountApproval = 'True'";
+                SqlCommand command = new SqlCommand(SQLString, dbConnection);
+                SqlDataReader result = command.ExecuteReader();
+                if (result.Read()) {
+                    n = Convert.ToInt32(result["total"].ToString());
+                }
+                result.Close();
+                dbConnection.Close();
+            } catch (SqlException exception) {
+                throw exception;
+            }
+            return n;
+        }
+
         public static User findById(int id) {
+            User user = null;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
@@ -44,12 +66,14 @@ namespace FinalProject.Model {
                     u.accountReason = result["accountReason"].ToString();
                     u.type = result["type"].ToString();
                     u.accountApproval = true;
-                    return u;
+                    user = u;
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
                 throw exception;
             }
-            return null;
+            return user;
         }
 
         public static List<User> findAll() {
@@ -74,8 +98,9 @@ namespace FinalProject.Model {
                     u.type = result["type"].ToString();
                     u.accountApproval = true;
                     users.Add(u);
-                    
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
                 throw exception;
             }
@@ -83,6 +108,7 @@ namespace FinalProject.Model {
         }
 
         public bool projectIsMine(int projectID) {
+            bool flag = false;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
@@ -93,12 +119,14 @@ namespace FinalProject.Model {
                 command.Parameters.AddWithValue("student_id", id);
                 SqlDataReader result = command.ExecuteReader();
                 if (result.Read()) {
-                    return true;
+                    flag = true;
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
-            return false;
+            return flag;
         }
 
         public List<Project> getProjects() {
@@ -130,6 +158,8 @@ namespace FinalProject.Model {
                     p.presentationPlace = result["presentationPlace"].ToString();
                     projects.Add(p);
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
@@ -137,6 +167,7 @@ namespace FinalProject.Model {
         }
 
         public bool verifyUserID() {
+            bool flag = true;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
@@ -146,12 +177,14 @@ namespace FinalProject.Model {
                 command.Parameters.AddWithValue("userID", userID);
                 SqlDataReader result = command.ExecuteReader();
                 if (result.Read()) {
-                    return false;
+                    flag = false;
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
-            return true;
+            return flag;
         }
         public bool add() {
             bool flag = false;
@@ -180,6 +213,7 @@ namespace FinalProject.Model {
                 };
 
                 reader.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
@@ -187,6 +221,7 @@ namespace FinalProject.Model {
         }
 
         public bool update() {
+            bool flag = false;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
@@ -203,15 +238,17 @@ namespace FinalProject.Model {
                 command.Parameters.AddWithValue("approval", accountApproval);
                 command.Parameters.AddWithValue("userID", userID);
                 if (command.ExecuteNonQuery() == 1) {
-                    return true;
+                    flag = true;
                 }
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
-            return false;
+            return flag;
         }
 
         public User login(string userID, string password) {
+            User u = null;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
@@ -223,7 +260,7 @@ namespace FinalProject.Model {
                 command.Parameters.AddWithValue("accountApproval", "True");
                 SqlDataReader result = command.ExecuteReader();
                 while (result.Read()) {
-                    User u = new User();
+                    u = new User();
                     u.id = Convert.ToInt32(result["id"].ToString());
                     u.firstName = result["firstName"].ToString();
                     u.lastName = result["lastName"].ToString();
@@ -235,15 +272,17 @@ namespace FinalProject.Model {
                     u.accountReason = result["accountReason"].ToString();
                     u.type = result["type"].ToString();
                     u.accountApproval = true;
-                    return u;
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
                 throw exception;
             }
-            return null;
+            return u;
         }
 
         public bool approveAccount(string userID) {
+            bool flag = false;
             string sqlString = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(sqlString);
 
@@ -254,15 +293,18 @@ namespace FinalProject.Model {
                 dbConnection.Open();
 
                 if (command.ExecuteNonQuery() == 1) {
-                    return true;
+                    flag = true;
                 }
+
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
-            return false;
+            return flag;
         }
 
         public bool verifyUserID(String userID) {
+            bool flag = false;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
@@ -272,12 +314,14 @@ namespace FinalProject.Model {
                 command.Parameters.AddWithValue("userID", userID);
                 SqlDataReader result = command.ExecuteReader();
                 if (result.Read()) {
-                    return true;
+                    flag = true;
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
-            return false;
+            return flag;
         }
 
         public string getQuestion(String userID) {
@@ -290,7 +334,10 @@ namespace FinalProject.Model {
                 command.Parameters.AddWithValue("userID", userID);
                 SqlDataReader result = command.ExecuteReader();
                 if (result.Read()) {
+                    dbConnection.Close();
                     return result[0].ToString();
+                } else {
+                    dbConnection.Close();
                 }
             } catch (SqlException exception) {
 
@@ -299,6 +346,7 @@ namespace FinalProject.Model {
         }
 
         public bool checkAnswer(String userID, String securityAnswer) {
+            bool flag = false;
             string conf = System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString;
             SqlConnection dbConnection = new SqlConnection(conf);
             try {
@@ -309,12 +357,14 @@ namespace FinalProject.Model {
                 command.Parameters.AddWithValue("securityAnswer", securityAnswer);
                 SqlDataReader result = command.ExecuteReader();
                 if (result.Read()) {
-                    return true;
+                    flag = true;
                 }
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }
-            return false;
+            return flag;
         }
 
         public bool updatePwd(String userID, String password) {
@@ -331,7 +381,8 @@ namespace FinalProject.Model {
                 if (result.Read()) {
                     updated = true;
                 }
-
+                result.Close();
+                dbConnection.Close();
             } catch (SqlException exception) {
 
             }

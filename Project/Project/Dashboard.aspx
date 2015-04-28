@@ -2,6 +2,34 @@
 
 <%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        .hero-widget {
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+            .hero-widget .icon {
+                display: block;
+                font-size: 96px;
+                line-height: 96px;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+            .hero-widget var {
+                display: block;
+                height: 64px;
+                font-size: 64px;
+                line-height: 64px;
+                font-style: normal;
+            }
+
+            .hero-widget label {
+                font-size: 17px;
+            }
+
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
 
@@ -14,39 +42,51 @@
                     <li><a href="AccountApproval.aspx">Account Approval</a></li>
                     <li><a href="PrintFlyer.aspx">Print Flyer</a></li>
                 </ul>
-                <%--<ul class="nav nav-sidebar">
-                    <li><a href="">Nav item</a></li>
-                    <li><a href="">Nav item again</a></li>
-                    <li><a href="">One more nav</a></li>
-                    <li><a href="">Another nav item</a></li>
-                    <li><a href="">More navigation</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li><a href="">Nav item again</a></li>
-                    <li><a href="">One more nav</a></li>
-                    <li><a href="">Another nav item</a></li>
-                </ul>--%>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header">Dashboard</h1>
-
-                <div class="row placeholders">
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <h1 style="font-size: 110px">10</h1>
-                        
-                        <h4>Users</h4>
+                <div class="col-sm-3">
+                    <div class="hero-widget">
+                        <div class="icon">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </div>
+                        <div class="text">
+                            <var><% Response.Write(FinalProject.Model.User.countUsers()); %></var>
+                            <label class="text-muted">Users</label>
+                        </div>
                     </div>
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <h1 style="font-size: 110px">32</h1>
-                        <h4>Projects/Theses</h4>
+                </div>
+                <div class="col-sm-3">
+                    <div class="hero-widget">
+                        <div class="icon">
+                            <i class="glyphicon glyphicon-file"></i>
+                        </div>
+                        <div class="text">
+                            <var><% Response.Write(FinalProject.Model.Project.countProjects()); %></var>
+                            <label class="text-muted">Theses</label>
+                        </div>
                     </div>
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <h1 style="font-size: 110px">128</h1>
-                        <h4>Total Downloads</h4>
+                </div>
+                <div class="col-sm-3">
+                    <div class="hero-widget">
+                        <div class="icon">
+                            <i class="glyphicon glyphicon-download-alt"></i>
+                        </div>
+                        <div class="text">
+                            <var><% Response.Write(FinalProject.Model.Project.countTotalDownloads()); %></var>
+                            <label class="text-muted">Downloads</label>
+                        </div>
                     </div>
-                    <div class="col-xs-6 col-sm-3 placeholder">
-                        <h1 style="font-size: 110px">256</h1>
-                        <h4>Total Views</h4>
+                </div>
+                <div class="col-sm-3">
+                    <div class="hero-widget ">
+                        <div class="icon">
+                            <i class="glyphicon glyphicon-stats"></i>
+                        </div>
+                        <div class="text">
+                            <var><% Response.Write(FinalProject.Model.Project.countTotalViews()); %></var>
+                            <label class="text-muted">Views</label>
+                        </div>
                     </div>
                 </div>
 

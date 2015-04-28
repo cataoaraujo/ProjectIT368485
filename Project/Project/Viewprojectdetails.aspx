@@ -1,133 +1,121 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Viewprojectdetails.aspx.cs" Inherits="Project_search.Viewprojectdetails" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.Master" AutoEventWireup="true" CodeBehind="Viewprojectdetails.aspx.cs" Inherits="Project_search.Viewprojectdetails" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>view project details</title>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
     <style type="text/css">
-
         .auto-style1 {
             width: 100%;
         }
+
         .auto-style2 {
             width: 133px;
         }
+
         .auto-style3 {
             width: 249px;
         }
     </style>
-</head>
-<body>
-    <form id="form1" runat="server">
-    
-       <table class="auto-style1">
+    <div class="container well">
+        <table class="auto-style1">
             <tr>
-                <td class="auto-style2">
-    
-       Project Id :&nbsp;</td>
-               
+                <td class="auto-style2">Project Id :&nbsp;</td>
+
                 <td>
                     <asp:Label ID="LblProjectId" runat="server"></asp:Label>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2"> Project Name :&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                 
+                <td class="auto-style2">Project Name :&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
                 <td>
-    
-       
+
+
                     <asp:Label ID="LblProjectName" runat="server"></asp:Label>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2">
-       Student_id&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                
+                <td class="auto-style2">Student_id&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
                 <td>
-    
-       
+
+
                     <asp:Label ID="LblStudID" runat="server"></asp:Label>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2">
-           CourseNumber&nbsp; &nbsp; </td>
-               
+                <td class="auto-style2">CourseNumber&nbsp; &nbsp; </td>
+
                 <td>
-    
-       
+
+
                     <asp:Label ID="LblCourName" runat="server"></asp:Label>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2">
-           LiveLink&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
-                
+                <td class="auto-style2">LiveLink&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+
                 <td>
-                    <a href="#" id="lnkLiveLink"  runat="server" style="color:#0000FF">View </a>
+                    <a href="#" id="lnkLiveLink" runat="server" style="color: #0000FF">View </a>
 
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2">
-           Abstract&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                <td class="auto-style2">Abstract&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                 </td>
-                 
+
                 <td>
-    
-       
-            <asp:TextBox ID="TextBox_Abstract" runat="server" style="margin-left: 0px" Width="294px" ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
+
+
+                    <asp:TextBox ID="TextBox_Abstract" runat="server" Style="margin-left: 0px" Width="294px" ReadOnly="True" TextMode="MultiLine"></asp:TextBox>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2">
-           Semester&nbsp;&nbsp; 
+                <td class="auto-style2">Semester&nbsp;&nbsp; 
 
-            </td>
-                
+                </td>
+
                 <td>
-    
-       
+
+
                     <asp:Label ID="LblSem" runat="server"></asp:Label>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2">
-           ScreenCastLink</td>
-                
+                <td class="auto-style2">ScreenCastLink</td>
+
                 <td>
-    
-       
+
+
                     <asp:Label ID="LblSrnCast" runat="server"></asp:Label>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2"> DateCreated&nbsp;&nbsp;&nbsp;&nbsp; 
+                <td class="auto-style2">DateCreated&nbsp;&nbsp;&nbsp;&nbsp; 
 
-            </td>
-               
+                </td>
+
                 <td>
-    
-       
+
+
                     <asp:Label ID="LblCreatedON" runat="server"></asp:Label>
                 </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2">Highlighted</td>
-                 
+
                 <td>
-    
-       
+
+
                     <asp:Label ID="LblHlght" runat="server"></asp:Label>
                 </td>
                 <td>&nbsp;</td>
@@ -150,8 +138,8 @@
                 <td>&nbsp;</td>
             </tr>
         </table>
-    
-     
+
+
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="334px" BackColor="White" BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4">
             <Columns>
                 <asp:BoundField DataField="id" HeaderText="id" InsertVisible="False" ReadOnly="True" SortExpression="id" />
@@ -178,13 +166,11 @@
             <SortedDescendingCellStyle BackColor="#D6DFDF" />
             <SortedDescendingHeaderStyle BackColor="#002876" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:it368485_finalprojectConnectionString %>" SelectCommand="SELECT P.id, P.name, P.student_id, P.courseNumber, P.liveLink, P.abstract, P.screencastLink, P.semester, P.dateCreated, P.highlighted, Ky.keyword, DS.documentName, DS.documentLink FROM Project AS P LEFT OUTER JOIN ProjectSubmission AS PD ON P.id = PD.project_id LEFT OUTER JOIN Documents AS DS ON DS.id = PD.document_id INNER JOIN ProjectKeywords AS PK ON P.id = PK.project_id INNER JOIN Keyword AS Ky ON Ky.id = PK.keyword_id WHERE (Ky.keyword IN (SELECT keyword FROM Keyword WHERE (id IN (SELECT keyword_id FROM ProjectKeywords WHERE (project_id = @PrjId)))))">
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Database %>" SelectCommand="SELECT P.id, P.name, P.student_id, P.courseNumber, P.liveLink, P.abstract, P.screencastLink, P.semester, P.dateCreated, P.highlighted, Ky.keyword, DS.documentName, DS.documentLink FROM Project AS P LEFT OUTER JOIN ProjectSubmission AS PD ON P.id = PD.project_id LEFT OUTER JOIN Documents AS DS ON DS.id = PD.document_id INNER JOIN ProjectKeywords AS PK ON P.id = PK.project_id INNER JOIN Keyword AS Ky ON Ky.id = PK.keyword_id WHERE (Ky.keyword IN (SELECT keyword FROM Keyword WHERE (id IN (SELECT keyword_id FROM ProjectKeywords WHERE (project_id = @PrjId)))))">
             <SelectParameters>
                 <asp:QueryStringParameter Name="PrjId" QueryStringField="PrjId" />
             </SelectParameters>
         </asp:SqlDataSource>
-    
-     
-    </form>
-</body>
-</html>
+
+    </div>
+</asp:Content>

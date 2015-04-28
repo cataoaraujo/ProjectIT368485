@@ -11,7 +11,7 @@ namespace FinalProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.AddHeader("REFRESH", "5;URL=Default.aspx");
+            //Response.AddHeader("REFRESH", "5;URL=Default.aspx");
         }
     }
 }

@@ -24,12 +24,11 @@ namespace Project_search
                 if (Request.QueryString["PrjId"] != null)
                 {
                     ViewState["ProjectId"] = Request.QueryString["PrjId"].ToString();
-                    Response.Write("Hello!!" + "</br>" + "</br>");
                 }
             }
             SqlConnection Dbconnect = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["Database"].ConnectionString);
             String Project_ID = Request.QueryString["PrjId"];
-            Response.Write("Details of this project is given below : " + "</br>");
+            //Response.Write("Details of this project is given below : " + "</br>");
             String sqlcmd = "Select * from project where id=" + "'" + Project_ID + "'";
             try
             {
