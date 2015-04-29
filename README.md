@@ -51,6 +51,6 @@ Details: Course #, live link, keywords, abstract, documentation in Word/PDF, scr
 
 * [x] Highlight/Showcase Thesis/Project 
 
-* [ ] Mark Thesis/Project for showcase <== Admin only
+* [x] Mark Thesis/Project for showcase <== Admin only
 
 * [x] Retrieve lost password
