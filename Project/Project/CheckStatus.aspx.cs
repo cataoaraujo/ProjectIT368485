@@ -19,20 +19,25 @@ namespace FinalProject {
                     Response.Redirect("Options.aspx");
                 }
                 project = Project.findById(projectID);
+                List<Committee> committees = new List<Committee>();
                 switch(Request.QueryString["type"]){
                     case "preliminary":
-                        StatusList.DataSource = Submissions.getCommitteeComments(projectID, Submissions.Type.PreliminaryProposal);
+                        committees= Submissions.getCommitteeComments(projectID, Submissions.Type.PreliminaryProposal);
                         break;
                     case "final":
-                        StatusList.DataSource = Submissions.getCommitteeComments(projectID, Submissions.Type.Final);
+                        committees=  Submissions.getCommitteeComments(projectID, Submissions.Type.Final);
                         break;
                     case "presentation":
-                        StatusList.DataSource = Submissions.getCommitteeComments(projectID, Submissions.Type.PresentationScheduling);
+                        committees = Submissions.getCommitteeComments(projectID, Submissions.Type.PresentationScheduling);
                         break;
                     default:
                         Response.Redirect("Default.aspx");
                         break;
                 }
+                if (committees.Count() == 0) {
+                    msg.Text = "There is no approval yet!";
+                }
+                StatusList.DataSource = committees;
                 StatusList.DataBind();
             }
         }

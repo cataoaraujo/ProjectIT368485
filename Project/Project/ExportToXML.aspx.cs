@@ -153,9 +153,9 @@ namespace FinalProject
 
                 doc.Save(Server.MapPath("./xml_data.xml"));
 
-                Label1.Text = "<h3>File Exported! Redirecting you back to the Options page.</h3>";
+                Label1.Text = "<h3>File Exported! Redirecting you to the File.</h3>";
 
-                Response.AddHeader("REFRESH", "5;URL=Options.aspx");
+                Response.AddHeader("REFRESH", "5;URL=xml_data.xml");
             }
             
         }

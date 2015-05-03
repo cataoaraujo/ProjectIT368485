@@ -31,6 +31,7 @@
                                 <asp:BoundField DataField="accountReason" HeaderText="Reason to sign up" SortExpression="accountReason" />
                                 <asp:ButtonField ButtonType="Button" CommandName="Select" HeaderText="Approve this account?" ShowHeader="True" Text="Approve" ControlStyle-CssClass="btn btn-success btn-lg" />
                             </Columns>
+                            <EmptyDataTemplate>There is no Account to approve!</EmptyDataTemplate>
                             <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
                             <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
                             <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />

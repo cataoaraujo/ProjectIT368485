@@ -46,7 +46,7 @@
                                             <div class="col-md-12">
                                                 <%--<a class="" href="Viewprojectdetails.aspx?PrjId=<%# Eval("id") %>" role="button"></a>--%>
                                                 <asp:Button ID="btView" runat="server" Text="View" CssClass="btn btn-default btn-primary" CommandArgument='<%# Eval("id") %>' CommandName="View" OnCommand="btView_Click" />
-                                                <asp:Button ID="btEdit" runat="server" Text="Edit" CssClass="btn btn-default btn-success" CommandArgument='<%# Eval("id") %>' CommandName="Edit" OnCommand="btView_Click" />
+                                                
                                                 <%--<asp:Button ID="btDwn" runat="server" Text="Download" CssClass="btn btn-default btn-success" OnClick="btView_Click"  CommandArgument="<%# Eval("id") %>" CommandName="download"/>--%>
                                             </div>
                                         </div>

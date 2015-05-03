@@ -30,6 +30,9 @@
                                 <th>Preliminary Proposal</th>
                                 <th>Final</th>
                                 <th>Presentation Scheduling</th>
+                                <th>Edit
+
+                                </th>
                                 <th>Export to XML</th>
                             </tr>
                             <asp:ListView ID="ProjectList" runat="server" RepeatDirection="Horizontal">
@@ -43,6 +46,7 @@
                                         <td>
                                             <label>
                                                 <%# presentationStatus(Convert.ToInt32(Eval("id"))) %></td>
+                                        <td><a href="Editdetails.aspx?PrjId=<%# Eval("id") %>" class="btn btn-default btn-success">Edit</a></td>
                                         <td>
                                             <label><%# exportToXML(Convert.ToInt32(Eval("id"))) %></td>
                                     </tr>

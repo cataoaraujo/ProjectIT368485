@@ -27,6 +27,7 @@
                         </ItemTemplate>
                     </asp:ListView>
                 </table>
+                <asp:Label ID="msg" runat="server" Text=""></asp:Label>
             </div>
         </div>
     </div>

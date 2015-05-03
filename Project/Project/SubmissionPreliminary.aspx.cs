@@ -37,7 +37,7 @@ namespace FinalProject {
                     FileUploadControl.SaveAs(Server.MapPath("~/Documents/") + filename);
 
                     document.name = filename;
-                    document.link = "/Documents/" + filename;
+                    document.link = "Documents/" + filename;
                     if (document.add()) {
                         submission.document = document;
                         if (submission.submit()) {

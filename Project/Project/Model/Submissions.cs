@@ -211,10 +211,10 @@ namespace FinalProject.Model {
                 emailMessage.From = new MailAddress("rcataoa@ilstu.edu", "Project IT368");
                 emailMessage.To.Add(new MailAddress(c.email));
                 emailMessage.Subject = "You are requested to Approve the Project: "+project.name;
-                emailMessage.IsBodyHtml = true; 
+                emailMessage.IsBodyHtml = true;
 
-                string message = "Link to the project: Viewprojectdetails.aspx?PrjId=" + project.id +"<br />";
-                message += "Link to approve the project: Approval.aspx?cID=" + c.id + "&sID="+submission.id+" <br />";
+                string message = "Link to the project: http://iis.it.ilstu.edu/485spr15/it4850126/App1/Viewprojectdetails.aspx?PrjId=" + project.id + "<br /><br />";
+                message += "Link to approve the project: http://iis.it.ilstu.edu/485spr15/it4850126/App1/Approval.aspx?cID=" + c.id + "&sID=" + submission.id + " <br />";
                 emailMessage.Body = message;
 
 
