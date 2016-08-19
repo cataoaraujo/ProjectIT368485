@@ -13,3 +13,8 @@ H:\ProjectIT368485\Project\Project\bin\Project.pdb
 H:\ProjectIT368485\Project\Project\obj\Debug\FinalProject.csprojResolveAssemblyReference.cache
 H:\ProjectIT368485\Project\Project\obj\Debug\Project.dll
 H:\ProjectIT368485\Project\Project\obj\Debug\Project.pdb
+F:\ProjectIT368485\Project\Project\bin\Project.dll
+F:\ProjectIT368485\Project\Project\bin\Project.pdb
+F:\ProjectIT368485\Project\Project\obj\Debug\FinalProject.csprojResolveAssemblyReference.cache
+F:\ProjectIT368485\Project\Project\obj\Debug\Project.dll
+F:\ProjectIT368485\Project\Project\obj\Debug\Project.pdb
